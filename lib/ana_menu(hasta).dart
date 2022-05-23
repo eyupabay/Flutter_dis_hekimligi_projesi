@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/profil_sayfasi.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'yiyecek_ve_icecek_okuma.dart';
 
@@ -82,6 +83,15 @@ class BoslukOlustur extends StatelessWidget {
 
 BottomNavigationBar enAltBar(BuildContext context) {
   return BottomNavigationBar(
+    onTap: (value) async {
+      if (value == Sayfalar.menu.index) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const HastaPaneli()));
+      } else if (value == Sayfalar.profil.index) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const ProfilPage()));
+      }
+    },
     backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
     selectedItemColor:
         Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
@@ -111,3 +121,5 @@ AppBar girisUstBar(BuildContext context) {
     actions: const [CikisYap()],
   );
 }
+
+enum Sayfalar { menu, profil }
