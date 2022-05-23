@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/ana_menu(hasta).dart';
-import 'package:flutter_uygulama_deniyorum/rol_mekanizmasi.dart';
+import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
 class LoginPage extends StatefulWidget {
@@ -37,11 +37,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Query doktor = FirebaseFirestore.instance
-      .collection("Musteriler")
-      .where("Doktor", isEqualTo: true);
-
-  @override
   Widget build(BuildContext context) {
     //textfield controller
     TextEditingController emailController =
@@ -68,121 +63,75 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
 
-    return Column(
-      //Sütun döndürür..
-      crossAxisAlignment: CrossAxisAlignment
-          .center, //CrossAxisAlignment, Column üzerinde Row oluşturarak ortalayan koordinat
-      children: <Widget>[
-        AppBar(
-          //Ekranın en üstünde bir bar açar
-          leadingWidth: double.infinity, //Ekranın en üstünü boydan boya kaplar
-          backgroundColor: Colors.blueGrey.shade900, //Renk verir
-          title: const Center(
-            child: Text(
-              Stringler.uygulamaAdi,
-              //textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20.0),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        //Ekranın en üstünde bir bar açar
+        leadingWidth: double.infinity,
+        title: Center(
+          child: Text(
+            Stringler.uygulamaAdi,
+            //textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.red[100]),
           ),
-        ),
-        const BoslukOlustur(),
-        const Text(
-          Stringler.kullaniciGiris,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.red, fontSize: 30.0),
-        ),
-        const BoslukOlustur(),
-        kayitMailBilgileri(emailController),
-        const BoslukOlustur(),
-        kayitSifreBilgileri(passwordController),
-        const BoslukOlustur(),
-        ElevatedButton(
-          onPressed: kayitol,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(20.0)),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            )),
-            backgroundColor: MaterialStateProperty.all(const Color(0xFF0069FE)),
-          ),
-          child: const Text(Stringler.kayitOl),
-        ),
-        const BoslukOlustur(),
-        //
-        //
-        //Giriş yapma fonksiyonları
-        //
-        //
-        SizedBox(
-          width: double.infinity,
-          child: RawMaterialButton(
-            onPressed: () async {
-              //const kararYeri();
-              User? user = await emailsifreGiris(
-                  email: emailController.text,
-                  password: passwordController.text,
-                  context: context);
-              print(user);
-              if (user != null) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HastaPaneli()));
-                //Navigate ile ilerideki sayfaya yönlendirdik.
-              }
-            },
-            fillColor: const Color(0xFF0069FE),
-            padding: const EdgeInsets.all(20.0),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            child: const Text(
-              "Giriş yap",
-              style: TextStyle(color: Colors.white, fontSize: 18.0),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  TextField kayitSifreBilgileri(TextEditingController passwordController) {
-    return TextField(
-      controller: passwordController,
-      obscureText: true, //Parola gizleme fonksiyonu
-      decoration: const InputDecoration(
-        hintText: "Şifre",
-        prefixIcon: Icon(
-          Icons.lock,
-          color: Colors.black,
         ),
       ),
-    );
-  }
-
-  TextField kayitMailBilgileri(TextEditingController emailController) {
-    return TextField(
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
-        hintText: "Email adresi",
-        prefixIcon: Icon(
-          Icons.mail,
-          color: Colors.black,
+      body: Padding(
+        padding: const EdgeInsets.only(right: 40, left: 40, top: 10),
+        child: Column(
+          //Sütun döndürür..
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              width: 150,
+              margin: const EdgeInsets.only(bottom: 30),
+              child: Image.asset('assets/images/tooth.jpeg'),
+            ),
+            const Text(
+              Stringler.karsila,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.red, fontSize: 30.0),
+            ),
+            kayitMailBilgileri(emailController),
+            kayitSifreBilgileri(passwordController),
+            TextButton(
+              onPressed: kayitol,
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                fixedSize: const Size(80, 60),
+              ),
+              child: const Text(
+                Stringler.kayitOl,
+                style: TextStyle(fontSize: 12.0),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                fixedSize: const Size(200, 60),
+              ),
+              onPressed: () async {
+                //const kararYeri();
+                User? user = await emailsifreGiris(
+                    email: emailController.text,
+                    password: passwordController.text,
+                    context: context);
+                print(user);
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HastaPaneli()));
+                  //Navigate ile ilerideki sayfaya yönlendirdik.
+                }
+              },
+              child: const Text(
+                "Giriş yap",
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
-
-
-/*giriş yapma
-              User? user = await emailsifreGiris(
-                  email: emailController.text,
-                  password: passwordController.text,
-                  context: context);
-              print(user);
-              if (user != null) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HastaPaneli()));
-                //Navigate ile ilerideki sayfaya yönlendirdik.
-              }
-     */       

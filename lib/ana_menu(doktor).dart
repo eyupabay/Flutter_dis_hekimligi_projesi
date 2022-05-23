@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/main.dart';
-import 'package:flutter_uygulama_deniyorum/profil_sayfasi.dart';
+import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
+import 'yiyecek_ve_icecek_okuma.dart';
 import 'ana_menu(hasta).dart';
 
 class DoktorPanel extends StatefulWidget {
@@ -16,23 +16,7 @@ class DoktorPanelState extends State<DoktorPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey.shade900,
-        title: const Text(
-          "Ana Sayfa",
-          textAlign: TextAlign.center,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            },
-            icon: const Icon(Icons.logout_sharp),
-          )
-        ],
-      ),
+      appBar: girisUstBar(context),
       body: Column(
         children: [
           StreamBuilder(
@@ -104,27 +88,6 @@ class DoktorPanelState extends State<DoktorPanel> {
       bottomNavigationBar: enAltBar(context),
     );
   }
-
-  int _selectedIndex = 0;
-
-  List widgetOptions = [
-    HomePage(),
-    ProfilPage(),
-  ];
-
-  void _onItemTapped(
-    int index,
-  ) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  Query yiyeceklerRef = FirebaseFirestore.instance
-      .collection("Musteriler")
-      .doc(FirebaseAuth.instance.currentUser!.email)
-      .collection("Yiyecekler")
-      .orderBy("Saat", descending: true);
 
   Query hastalarRef = FirebaseFirestore.instance.collection("Musteriler");
 }

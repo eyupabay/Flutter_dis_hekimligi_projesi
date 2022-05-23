@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/main.dart';
+import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'yiyecek_ve_icecek_okuma.dart';
 
@@ -15,34 +15,20 @@ class _HastaPaneliState extends State<HastaPaneli> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: const Text(
-          Stringler.anaSayfa,
-          textAlign: TextAlign.center,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            },
-            icon: const Icon(Icons.logout_sharp),
-          )
-        ],
-      ),
+      appBar: girisUstBar(context),
       body: Column(children: [
         const BoslukOlustur(),
         yemekAvcisi(),
         const BoslukOlustur(),
         icecekAvcisi(),
         const BoslukOlustur(),
-        RawMaterialButton(
-          onPressed: () {
-            veriEkle().then((value) => {yemek.clear(), icecek.clear()});
-          },
-          fillColor: Theme.of(context).colorScheme.secondary,
+        ElevatedButton(
+          onPressed: YeIcVeriEkle,
+          style: ElevatedButton.styleFrom(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            primary: Colors.blueAccent,
+          ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
           child: const Text(
             "Veri ekle",
             style: TextStyle(color: Colors.white),
@@ -54,6 +40,10 @@ class _HastaPaneliState extends State<HastaPaneli> {
       ]),
       bottomNavigationBar: enAltBar(context),
     );
+  }
+
+  Future<void> YeIcVeriEkle() async {
+    veriEkle().then((value) => {yemek.clear(), icecek.clear()});
   }
 
   TextField icecekAvcisi() {
@@ -108,5 +98,16 @@ BottomNavigationBar enAltBar(BuildContext context) {
         label: "profil",
       ),
     ],
+  );
+}
+
+AppBar girisUstBar(BuildContext context) {
+  return AppBar(
+    backgroundColor: Theme.of(context).backgroundColor,
+    title: const Text(
+      Stringler.anaSayfa,
+      textAlign: TextAlign.center,
+    ),
+    actions: const [CikisYap()],
   );
 }
