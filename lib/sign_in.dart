@@ -38,7 +38,8 @@ class _SigninPageState extends State<SigninPage> {
           "Email": emailController.text
         }).whenComplete(() => print(
                 "Kullanıcı oluşturulup veritabanında Musteriler koleksiyonuna hasta profili ekledi."));
-      });
+      }).whenComplete(() => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const LoginPage())));
     }
 
     return Scaffold(
@@ -54,8 +55,7 @@ class _SigninPageState extends State<SigninPage> {
         ),
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.only(right: 30, left: 30, top: 15, bottom: 15),
+        padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
           //Sütun döndürür..
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,7 +66,7 @@ class _SigninPageState extends State<SigninPage> {
               child: Image.asset('assets/images/tooth.png'),
             ),
             const Text(
-              Stringler.kayitOl,
+              Stringler.kayitOlmaPaneli,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.red, fontSize: 30.0),
             ),
@@ -81,9 +81,8 @@ class _SigninPageState extends State<SigninPage> {
                         builder: (context) => const LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    fixedSize: const Size(120, 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    fixedSize: const Size(100, 20),
                   ),
                   child: const Text(
                     Stringler.kullaniciGiris,

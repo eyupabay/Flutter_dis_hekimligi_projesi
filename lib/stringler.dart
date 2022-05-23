@@ -4,4 +4,5 @@ class Stringler {
   static const kayitOl = "Kayıt ol";
   static const anaSayfa = "Ana Sayfa";
   static const karsila = "Hoşgeldiniz";
+  static const kayitOlmaPaneli = "Kayıt olma Paneli";
 }

@@ -77,8 +77,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.only(right: 30, left: 30, top: 15, bottom: 15),
+        padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
           //Sütun döndürür..
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -104,8 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                         builder: (context) => const SigninPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     fixedSize: const Size(80, 60),
                   ),
                   child: const Text(

@@ -7,6 +7,7 @@ TextField kayitSifreBilgileri(TextEditingController passwordController) =>
       controller: passwordController,
       obscureText: true, //Parola gizleme fonksiyonu
       decoration: const InputDecoration(
+        border: OutlineInputBorder(),
         hintText: "Şifre",
         prefixIcon: Icon(
           Icons.lock,
@@ -22,6 +23,7 @@ TextField kayitMailBilgileri(TextEditingController emailController) =>
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: const InputDecoration(
+        border: OutlineInputBorder(),
         hintText: "Email adresi",
         prefixIcon: Icon(
           Icons.mail,
