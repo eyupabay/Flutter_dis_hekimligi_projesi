@@ -82,7 +82,7 @@ class BoslukOlustur extends StatelessWidget {
 
 BottomNavigationBar enAltBar(BuildContext context) {
   return BottomNavigationBar(
-    backgroundColor: Theme.of(context).backgroundColor,
+    backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
     selectedItemColor:
         Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
     unselectedItemColor:
@@ -103,7 +103,7 @@ BottomNavigationBar enAltBar(BuildContext context) {
 
 AppBar girisUstBar(BuildContext context) {
   return AppBar(
-    backgroundColor: Theme.of(context).backgroundColor,
+    backgroundColor: Theme.of(context).appBarTheme.shadowColor,
     title: const Text(
       Stringler.anaSayfa,
       textAlign: TextAlign.center,

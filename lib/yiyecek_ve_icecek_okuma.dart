@@ -77,7 +77,7 @@ class yiyecekleriOkuma extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Card(
                     //Kart şeklinde gözükmesi için
-                    color: Colors.indigo.shade100,
+                    color: Theme.of(context).cardColor,
                     elevation: 2.0,
                     child: ListTile(
                       //Liste oluşturulsun ve istediğimiz gibi aşağı kaydırabilelim
@@ -124,7 +124,7 @@ class icecekleriOkuma extends StatelessWidget {
               itemCount: listofDocsSnap.length,
               itemBuilder: (context, index) {
                 return Card(
-                  color: Colors.indigo.shade200,
+                  color: Theme.of(context).cardColor,
                   elevation: 2.0,
                   child: ListTile(
                     title: Text(

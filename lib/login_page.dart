@@ -71,20 +71,21 @@ class _LoginPageState extends State<LoginPage> {
           child: Text(
             Stringler.uygulamaAdi,
             //textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.red[100]),
+            style: TextStyle(color: Colors.red[120]),
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(right: 40, left: 40, top: 10),
+        padding:
+            const EdgeInsets.only(right: 30, left: 30, top: 15, bottom: 15),
         child: Column(
           //Sütun döndürür..
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
               width: 150,
-              margin: const EdgeInsets.only(bottom: 30),
-              child: Image.asset('assets/images/tooth.jpeg'),
+              margin: const EdgeInsets.only(bottom: 20),
+              child: Image.asset('assets/images/tooth.png'),
             ),
             const Text(
               Stringler.karsila,
@@ -109,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                fixedSize: const Size(200, 60),
+                fixedSize: const Size(170, 60),
               ),
               onPressed: () async {
                 //const kararYeri();
