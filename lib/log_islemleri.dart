@@ -17,6 +17,7 @@ TextField kayitSifreBilgileri(TextEditingController passwordController) =>
 
 TextField kayitMailBilgileri(TextEditingController emailController) =>
     TextField(
+      textInputAction: TextInputAction.next,
       autofocus: true,
       controller: emailController,
       keyboardType: TextInputType.emailAddress,

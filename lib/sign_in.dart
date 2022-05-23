@@ -3,40 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/ana_menu(hasta).dart';
 import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/sign_in.dart';
+import 'package:flutter_uygulama_deniyorum/login_page.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SigninPage extends StatefulWidget {
+  const SigninPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SigninPageState createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  //Giris fonksiyonları
-  static Future<User?> emailsifreGiris(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
-    FirebaseAuth auth =
-        FirebaseAuth.instance; //Firebase Authentication çalıştırıyoruz.
-    User? user;
-    try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          //userCredential sınıfı içerisinde kayıtlı email aranıyor...
-          email: email,
-          password: password);
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      //userCredential içerisinde kayıtlı email yoksa ekrana bulunamadı yazdırıyor...
-      if (e.code == "user-not-found") {
-        print("Kullanici bulunamadi.");
-      }
-    }
-    return user;
-  }
-
+class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     //textfield controller
@@ -89,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Image.asset('assets/images/tooth.png'),
             ),
             const Text(
-              Stringler.karsila,
+              Stringler.kayitOl,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.red, fontSize: 30.0),
             ),
@@ -101,15 +78,15 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const SigninPage()));
+                        builder: (context) => const LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    fixedSize: const Size(80, 60),
+                        horizontal: 10, vertical: 10),
+                    fixedSize: const Size(120, 20),
                   ),
                   child: const Text(
-                    Stringler.kayitOl,
+                    Stringler.kullaniciGiris,
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -121,21 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                 fixedSize: const Size(170, 60),
               ),
-              onPressed: () async {
-                //const kararYeri();
-                User? user = await emailsifreGiris(
-                    email: emailController.text,
-                    password: passwordController.text,
-                    context: context);
-                print(user);
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HastaPaneli()));
-                  //Navigate ile ilerideki sayfaya yönlendirdik.
-                }
-              },
+              onPressed: kayitol,
               child: const Text(
-                "Giriş yap",
+                "Kayıt Ol",
                 style: TextStyle(color: Colors.white, fontSize: 16.0),
               ),
             ),
