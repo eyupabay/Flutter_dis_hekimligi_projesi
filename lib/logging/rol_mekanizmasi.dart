@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/ana_menu(doktor).dart';
-import 'package:flutter_uygulama_deniyorum/ana_menu(hasta).dart';
-import 'package:flutter_uygulama_deniyorum/login_page.dart';
-import "login_page.dart";
+import 'package:flutter_uygulama_deniyorum/pages/ana_menu(doktor).dart';
+import 'package:flutter_uygulama_deniyorum/pages/ana_menu(hasta).dart';
+import 'package:flutter_uygulama_deniyorum/pages/login_page.dart';
+import '../pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

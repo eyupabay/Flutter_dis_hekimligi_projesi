@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
-import 'yiyecek_ve_icecek_okuma.dart';
+import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import 'ana_menu(hasta).dart';
 
 class DoktorPanel extends StatefulWidget {

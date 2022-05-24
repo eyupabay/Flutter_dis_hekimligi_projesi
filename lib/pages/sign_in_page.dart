@@ -1,42 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/ana_menu(hasta).dart';
-import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/sign_in_page.dart';
+import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/pages/login_page.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SigninPage extends StatefulWidget {
+  const SigninPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SigninPageState createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  //Giris fonksiyonları
-  static Future<User?> emailsifreGiris(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
-    FirebaseAuth auth =
-        FirebaseAuth.instance; //Firebase Authentication çalıştırıyoruz.
-    User? user;
-    try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          //userCredential sınıfı içerisinde kayıtlı email aranıyor...
-          email: email,
-          password: password);
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      //userCredential içerisinde kayıtlı email yoksa ekrana bulunamadı yazdırıyor...
-      if (e.code == "user-not-found") {
-        print("Kullanici bulunamadi.");
-      }
-    }
-    return user;
-  }
-
+class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     //textfield controller
@@ -61,7 +37,8 @@ class _LoginPageState extends State<LoginPage> {
           "Email": emailController.text
         }).whenComplete(() => print(
                 "Kullanıcı oluşturulup veritabanında Musteriler koleksiyonuna hasta profili ekledi."));
-      });
+      }).whenComplete(() => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const LoginPage())));
     }
 
     return Scaffold(
@@ -84,32 +61,31 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Container(
               width: 150,
-              margin: const EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 10),
               child: Image.asset('assets/images/tooth.png'),
             ),
-            const Text(
-              Stringler.karsila,
+            Text(
+              Stringler.kayitOlmaPaneli,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.red, fontSize: 30.0),
+              style: Theme.of(context).textTheme.headline4,
             ),
-            kayitMailBilgileri(emailController),
-            kayitSifreBilgileri(passwordController),
+            textMailGirdileri(emailController),
+            textSifreGirdileri(passwordController),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const SigninPage()));
+                        builder: (context) => const LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    fixedSize: const Size(80, 60),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                  ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      fixedSize: const Size(100, 20),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14))),
                   child: Text(
-                    Stringler.kayitOl,
+                    Stringler.kullaniciGiris,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
@@ -117,26 +93,16 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  fixedSize: const Size(170, 60),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14))),
-              onPressed: () async {
-                //const kararYeri();
-                User? user = await emailsifreGiris(
-                    email: emailController.text,
-                    password: passwordController.text,
-                    context: context);
-                print(user);
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HastaPaneli()));
-                  //Navigate ile ilerideki sayfaya yönlendirdik.
-                }
-              },
+                primary: Color(Theme.of(context).backgroundColor.blue),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                fixedSize: const Size(170, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
+              ),
+              onPressed: kayitol,
               child: Text(
-                Stringler.girisYap,
+                Stringler.kayitOl,
                 style: Theme.of(context).textTheme.bodyText1,
                 textScaleFactor: 1.2,
               ),

@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/profil_sayfasi.dart';
+import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/pages/profil_sayfasi.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
-import 'hasta_sayfa_bilgileri.dart';
-import 'yiyecek_ve_icecek_okuma.dart';
+import '../hasta_bilgileri/hasta_sayfa_bilgileri.dart';
+import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 
 class HastaPaneli extends StatefulWidget {
   const HastaPaneli({Key? key}) : super(key: key);

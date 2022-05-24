@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_uygulama_deniyorum/main.dart';
 
-TextField kayitSifreBilgileri(TextEditingController passwordController) =>
+TextField textSifreGirdileri(TextEditingController passwordController) =>
     TextField(
       controller: passwordController,
       obscureText: true, //Parola gizleme fonksiyonu
@@ -16,8 +16,7 @@ TextField kayitSifreBilgileri(TextEditingController passwordController) =>
       ),
     );
 
-TextField kayitMailBilgileri(TextEditingController emailController) =>
-    TextField(
+TextField textMailGirdileri(TextEditingController emailController) => TextField(
       textInputAction: TextInputAction.next,
       autofocus: true,
       controller: emailController,
