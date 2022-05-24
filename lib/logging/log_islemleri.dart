@@ -2,34 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_uygulama_deniyorum/main.dart';
 
-TextField textSifreGirdileri(TextEditingController passwordController) =>
-    TextField(
-      controller: passwordController,
-      obscureText: true, //Parola gizleme fonksiyonu
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: "Şifre",
-        prefixIcon: Icon(
-          Icons.lock,
-          color: Colors.black,
-        ),
-      ),
-    );
+TextField textGirdileri(
+    TextEditingController alinacakBilgi,
+    InputDecoration dekorasyon,
+    bool isAutofocus,
+    TextInputAction ilerleme,
+    bool isObscureText) {
+  return TextField(
+    textInputAction: TextInputAction.next,
+    obscureText: isObscureText,
+    autofocus: isAutofocus,
+    controller: alinacakBilgi,
+    keyboardType: TextInputType.emailAddress,
+    decoration: dekorasyon,
+  );
+}
 
-TextField textMailGirdileri(TextEditingController emailController) => TextField(
-      textInputAction: TextInputAction.next,
-      autofocus: true,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: "Email adresi",
-        prefixIcon: Icon(
-          Icons.mail,
-          color: Colors.black,
-        ),
-      ),
-    );
+InputDecoration girisSifreDekorasyonu() {
+  return const InputDecoration(
+    border: OutlineInputBorder(),
+    hintText: "Şifre",
+    prefixIcon: Icon(
+      Icons.lock,
+      color: Colors.black,
+    ),
+  );
+}
+
+InputDecoration girisMailDekorasyonu() {
+  return const InputDecoration(
+    border: OutlineInputBorder(),
+    hintText: "Email adresi",
+    prefixIcon: Icon(
+      Icons.mail,
+      color: Colors.black,
+    ),
+  );
+}
 
 class CikisYap extends StatelessWidget {
   const CikisYap({

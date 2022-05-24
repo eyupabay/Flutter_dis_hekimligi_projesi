@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/pages/login_page.dart';
-import 'package:flutter_uygulama_deniyorum/stringler.dart';
+import '../logging/log_islemleri.dart';
+import 'login_page.dart';
+import '../stringler.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class _SigninPageState extends State<SigninPage> {
           child: Text(
             Stringler.uygulamaAdi,
             //textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.red[120]),
+            style: Theme.of(context).appBarTheme.titleTextStyle,
           ),
         ),
       ),
@@ -69,8 +69,10 @@ class _SigninPageState extends State<SigninPage> {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
-            textMailGirdileri(emailController),
-            textSifreGirdileri(passwordController),
+            textGirdileri(emailController, girisMailDekorasyonu(), true,
+                TextInputAction.next, false),
+            textGirdileri(passwordController, girisSifreDekorasyonu(), false,
+                TextInputAction.none, true),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

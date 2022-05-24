@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/pages/ana_menu(hasta).dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import '../sayfa_duzenleri.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: girisUstBar(context),
+      appBar: menuUstBar(context),
       body: ElevatedButton(
           onPressed: () {
             const CikisYap();

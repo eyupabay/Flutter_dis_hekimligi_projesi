@@ -49,18 +49,19 @@ Future<void> veriEkle() async {
   }
 }
 
-class yiyecekleriOkuma extends StatelessWidget {
-  const yiyecekleriOkuma({
+class HastaBilgileriOkuma extends StatelessWidget {
+  const HastaBilgileriOkuma({
     Key? key,
-    required this.yiyeceklerRef,
+    required this.okunacakBilgi,
+    required this.okunacakBilgiKlasoru,
   }) : super(key: key);
 
-  final Query<Object?> yiyeceklerRef;
-
+  final Query<Object?> okunacakBilgi;
+  final String okunacakBilgiKlasoru;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: yiyeceklerRef
+        stream: okunacakBilgi
             .snapshots(), //yiyeceklerRef değişkenindeki tüm verileri çek
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.data == null) {
@@ -82,7 +83,7 @@ class yiyecekleriOkuma extends StatelessWidget {
                     child: ListTile(
                       //Liste oluşturulsun ve istediğimiz gibi aşağı kaydırabilelim
                       title: Text(
-                        listofDocsSnap[index].get("Yemek"),
+                        listofDocsSnap[index].get(okunacakBilgiKlasoru),
                         //  Yiyecekleri dinlemek istediğimiz için veritabanında dökümanların her bir
                         //indeksindeki ".get()" fonksiyonu ile istediğimiz alandaki veriyi çekiyoruz.
                         style:
@@ -97,50 +98,6 @@ class yiyecekleriOkuma extends StatelessWidget {
                     ),
                   );
                 }),
-          );
-        });
-  }
-}
-
-class icecekleriOkuma extends StatelessWidget {
-  const icecekleriOkuma({
-    Key? key,
-    required this.iceceklerRef,
-  }) : super(key: key);
-
-  final Query<Object?> iceceklerRef;
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: iceceklerRef.snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.data == null) {
-            return const CircularProgressIndicator();
-          }
-          List<DocumentSnapshot> listofDocsSnap = snapshot.data!.docs;
-          return Flexible(
-            child: ListView.builder(
-              itemCount: listofDocsSnap.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Theme.of(context).cardColor,
-                  elevation: 2.0,
-                  child: ListTile(
-                    title: Text(
-                      listofDocsSnap[index].get("İçecek"),
-                      style: const TextStyle(fontSize: 14, letterSpacing: 1.2),
-                    ),
-                    subtitle: Text(listofDocsSnap[index].get("Saat")),
-                    trailing: IconButton(
-                        onPressed: () async {
-                          await listofDocsSnap[index].reference.delete();
-                        },
-                        icon: const Icon(Icons.delete)),
-                  ),
-                );
-              },
-            ),
           );
         });
   }

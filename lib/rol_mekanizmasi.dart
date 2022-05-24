@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/pages/ana_menu(doktor).dart';
-import 'package:flutter_uygulama_deniyorum/pages/ana_menu(hasta).dart';
-import 'package:flutter_uygulama_deniyorum/pages/login_page.dart';
-import '../pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'sayfalar/ana_menu(doktor).dart';
+import 'sayfalar/ana_menu(hasta).dart';
+import 'sayfalar/login_page.dart';
 
 class kararYeri extends StatelessWidget {
   const kararYeri({Key? key}) : super(key: key);

@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
-import 'ana_menu(hasta).dart';
+import '../sayfa_duzenleri.dart';
 
 class DoktorPanel extends StatefulWidget {
   const DoktorPanel({Key? key}) : super(key: key);
@@ -16,7 +14,7 @@ class DoktorPanelState extends State<DoktorPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: girisUstBar(context),
+      appBar: menuUstBar(context),
       body: Column(
         children: [
           StreamBuilder(

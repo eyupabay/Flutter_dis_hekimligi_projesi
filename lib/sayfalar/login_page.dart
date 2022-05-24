@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/pages/ana_menu(hasta).dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/pages/sign_in_page.dart';
-import 'package:flutter_uygulama_deniyorum/stringler.dart';
+import '../sayfa_duzenleri.dart';
+import '../stringler.dart';
+import 'ana_menu(hasta).dart';
+import 'sign_in_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -65,17 +66,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        //Ekranın en üstünde bir bar açar
-        leadingWidth: double.infinity,
-        title: Center(
-          child: Text(
-            Stringler.uygulamaAdi,
-            //textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.red[120]),
-          ),
-        ),
-      ),
+      appBar: girisUstBar(context),
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
@@ -92,8 +83,10 @@ class _LoginPageState extends State<LoginPage> {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
-            textMailGirdileri(emailController),
-            textSifreGirdileri(passwordController),
+            textGirdileri(emailController, girisMailDekorasyonu(), true,
+                TextInputAction.next, false),
+            textGirdileri(passwordController, girisSifreDekorasyonu(), false,
+                TextInputAction.none, true),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

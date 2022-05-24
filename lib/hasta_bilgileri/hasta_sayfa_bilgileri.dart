@@ -5,17 +5,6 @@ Future<void> yeIcVeriEkle() async {
   veriEkle().then((value) => {yemek.clear(), icecek.clear()});
 }
 
-TextField icecekAvcisi() {
-  return TextField(
-    controller: icecek,
-    keyboardType: TextInputType.text,
-    decoration: const InputDecoration(
-      hintText: "İçtiğiniz içecek",
-      prefixIcon: Icon(Icons.local_drink),
-    ),
-  );
-}
-
 TextField hastaVeriAvcisi(
     TextEditingController eklenecekVeri, InputDecoration veriDekorasyonu) {
   return TextField(
