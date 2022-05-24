@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/ana_menu(hasta).dart';
 import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/sign_in.dart';
+import 'package:flutter_uygulama_deniyorum/sign_in_page.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
 class LoginPage extends StatefulWidget {
@@ -105,20 +105,23 @@ class _LoginPageState extends State<LoginPage> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     fixedSize: const Size(80, 60),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
                   ),
-                  child: const Text(
+                  child: Text(
                     Stringler.kayitOl,
-                    style: TextStyle(fontSize: 12.0),
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
               ],
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                fixedSize: const Size(170, 60),
-              ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  fixedSize: const Size(170, 60),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14))),
               onPressed: () async {
                 //const kararYeri();
                 User? user = await emailsifreGiris(
@@ -132,9 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                   //Navigate ile ilerideki sayfaya yönlendirdik.
                 }
               },
-              child: const Text(
-                "Giriş yap",
-                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              child: Text(
+                Stringler.girisYap,
+                style: Theme.of(context).textTheme.bodyText1,
+                textScaleFactor: 1.2,
               ),
             ),
           ],

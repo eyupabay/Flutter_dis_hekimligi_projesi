@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/ana_menu(hasta).dart';
 import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/login_page.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
@@ -81,12 +80,13 @@ class _SigninPageState extends State<SigninPage> {
                         builder: (context) => const LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    fixedSize: const Size(100, 20),
-                  ),
-                  child: const Text(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      fixedSize: const Size(100, 20),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14))),
+                  child: Text(
                     Stringler.kullaniciGiris,
-                    style: TextStyle(fontSize: 12.0),
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
               ],
@@ -96,11 +96,14 @@ class _SigninPageState extends State<SigninPage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                 fixedSize: const Size(170, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
               ),
               onPressed: kayitol,
-              child: const Text(
-                "Kayıt Ol",
-                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              child: Text(
+                Stringler.kayitOl,
+                style: Theme.of(context).textTheme.bodyText1,
+                textScaleFactor: 1.2,
               ),
             ),
           ],

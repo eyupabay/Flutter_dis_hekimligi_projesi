@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/profil_sayfasi.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
+import 'hasta_sayfa_bilgileri.dart';
 import 'yiyecek_ve_icecek_okuma.dart';
 
 class HastaPaneli extends StatefulWidget {
@@ -17,53 +18,31 @@ class _HastaPaneliState extends State<HastaPaneli> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: girisUstBar(context),
-      body: Column(children: [
-        const BoslukOlustur(),
-        yemekAvcisi(),
-        const BoslukOlustur(),
-        icecekAvcisi(),
-        const BoslukOlustur(),
-        ElevatedButton(
-          onPressed: YeIcVeriEkle,
-          style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            primary: Colors.blueAccent,
-          ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-          child: const Text(
-            "Veri ekle",
-            style: TextStyle(color: Colors.white),
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(children: [
+          hastaVeriAvcisi(yemek, yiyecekDekorasyonu()),
+          hastaVeriAvcisi(icecek, icecekDekorasyonu()),
+          ElevatedButton(
+            onPressed: yeIcVeriEkle,
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14)),
+              primary: Colors.blueAccent,
+            ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+            child: const Text(
+              "Veri ekle",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-        ),
-        const BoslukOlustur(),
-        yiyecekleriOkuma(yiyeceklerRef: yiyeceklerRef),
-        icecekleriOkuma(iceceklerRef: iceceklerRef),
-      ]),
-      bottomNavigationBar: enAltBar(context),
-    );
-  }
-
-  Future<void> YeIcVeriEkle() async {
-    veriEkle().then((value) => {yemek.clear(), icecek.clear()});
-  }
-
-  TextField icecekAvcisi() {
-    return TextField(
-      controller: icecek,
-      keyboardType: TextInputType.text,
-      decoration: const InputDecoration(
-        hintText: "İçtiğiniz içecek",
-        prefixIcon: Icon(Icons.local_drink),
+          yiyecekleriOkuma(yiyeceklerRef: yiyeceklerRef),
+          const Divider(
+            height: 20,
+          ),
+          icecekleriOkuma(iceceklerRef: iceceklerRef),
+        ]),
       ),
-    );
-  }
-
-  TextField yemekAvcisi() {
-    return TextField(
-      controller: yemek,
-      keyboardType: TextInputType.text,
-      decoration: const InputDecoration(
-          hintText: "Yediğiniz yiyecek", prefixIcon: Icon(Icons.food_bank)),
+      bottomNavigationBar: enAltBar(context),
     );
   }
 }
