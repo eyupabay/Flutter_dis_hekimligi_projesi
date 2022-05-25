@@ -59,4 +59,10 @@ AppBar menuUstBar(BuildContext context) {
   );
 }
 
+mixin Yonlendirme {
+  void sayfaYonlendirme(BuildContext context, Widget widget) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => widget));
+  }
+}
+
 enum Sayfalar { menu, profil }

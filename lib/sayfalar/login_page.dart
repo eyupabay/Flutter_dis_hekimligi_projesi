@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import '../rol_mekanizmasi.dart';
 import '../sayfa_duzenleri.dart';
 import '../stringler.dart';
 import 'ana_menu(hasta).dart';
@@ -117,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14))),
               onPressed: () async {
-                //const kararYeri();
+                /* const KararYeri(); */
                 User? user = await emailsifreGiris(
                     email: emailController.text,
                     password: passwordController.text,

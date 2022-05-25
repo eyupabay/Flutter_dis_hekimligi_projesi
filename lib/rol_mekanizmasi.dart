@@ -6,8 +6,8 @@ import 'sayfalar/ana_menu(doktor).dart';
 import 'sayfalar/ana_menu(hasta).dart';
 import 'sayfalar/login_page.dart';
 
-class kararYeri extends StatelessWidget {
-  const kararYeri({Key? key}) : super(key: key);
+class KararYeri extends StatelessWidget {
+  const KararYeri({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,11 @@ class kararYeri extends StatelessWidget {
                 if (snapshot.hasData && snapshot.data != null) {
                   final userDoc = snapshot.data;
                   final user = userDoc!;
-                  if (user['role'] == 'doktor') {
+                  if (user['role'] == "doktor") {
+                    print("Doktor giriş yaptı.");
                     return const DoktorPanel();
                   } else {
+                    print("Hasta giriş yaptı.");
                     return const HastaPaneli();
                   }
                 } else {
