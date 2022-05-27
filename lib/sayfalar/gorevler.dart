@@ -13,7 +13,7 @@ class _GorevlerState extends State<Gorevler> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
+      appBar: ustBar(context: context, textYazisi: Stringler.gorevler),
       body: Container(
         width: 400,
         height: 300,

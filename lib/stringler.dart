@@ -1,3 +1,5 @@
+import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
+
 class Stringler {
   static const uygulamaAdi = "Diş Sağlığı Uygulaması";
   static const kullaniciGiris = "Kullanıcı girişi";
@@ -6,5 +8,7 @@ class Stringler {
   static const karsila = "Hoşgeldiniz";
   static const kayitOlmaPaneli = "Kayıt olma Paneli";
   static const girisYap = "Giriş yap";
-  static const profilSayfasi = "Profil Sayfası";
+  static const profil = "Profil";
+  static const gorevler = "Görevler";
+  static const mesajlar = "Mesajlar";
 }

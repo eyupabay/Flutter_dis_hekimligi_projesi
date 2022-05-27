@@ -16,7 +16,7 @@ class _ProfilPageState extends State<ProfilPage> {
     return Scaffold(
       appBar: ustBar(
           context: context,
-          textYazisi: Stringler.profilSayfasi,
+          textYazisi: Stringler.profil,
           aksiyon: [const CikisYap()]),
       body: Column(
         children: [
