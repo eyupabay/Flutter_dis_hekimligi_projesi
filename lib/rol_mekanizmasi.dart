@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'sayfalar/ana_menu(doktor).dart';
-import 'sayfalar/ana_menu(hasta).dart';
+import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
 import 'sayfalar/login_page.dart';
 
 class KararYeri extends StatelessWidget {
@@ -10,26 +9,27 @@ class KararYeri extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
+    return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (context, snapshot) {
+          print("StreamBuilder baslatıldı.");
           if (snapshot.hasData && snapshot.data != null) {
+            print("snapshot'ların icerisinin bos olmadıgı gozlemlendi.");
             return StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("Musteriler")
                   .doc(FirebaseAuth.instance.currentUser!.email)
                   .snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<DocumentSnapshot> snapshot) {
+              builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   final userDoc = snapshot.data;
                   final user = userDoc!;
                   if (user['role'] == "doktor") {
                     print("Doktor giriş yaptı.");
-                    return const DoktorPanel();
+                    return const EnAltBarDoktor();
                   } else {
                     print("Hasta giriş yaptı.");
-                    return const HastaPaneli();
+                    return const EnAltBar();
                   }
                 } else {
                   return const Material(

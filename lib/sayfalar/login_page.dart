@@ -6,7 +6,7 @@ import '../rol_mekanizmasi.dart';
 import '../sayfa_duzenleri.dart';
 import '../stringler.dart';
 import 'ana_menu(hasta).dart';
-import 'sign_in_page.dart';
+import 'sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                 print(user);
                 if (user != null) {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const enAltBar()));
+                      builder: (context) => const EnAltBar()));
                   //Navigate ile ilerideki sayfaya yönlendirdik.
                 }
               },

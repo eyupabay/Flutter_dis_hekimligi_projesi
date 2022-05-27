@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/sign_in_page.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/login_page.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/sign_up_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         future: _initializeFirebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return const enAltBar();
+            return const LoginPage();
           }
           return const Center(
             child: CircularProgressIndicator(),

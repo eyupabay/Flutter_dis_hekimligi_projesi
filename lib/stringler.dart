@@ -1,3 +1,4 @@
+import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
 
 class Stringler {
@@ -11,4 +12,5 @@ class Stringler {
   static const profil = "Profil";
   static const gorevler = "Görevler";
   static const mesajlar = "Mesajlar";
+  static const cikisYap = "Çıkış yap";
 }
