@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/mesajlasma.dart';
 import 'logging/log_islemleri.dart';
 import 'sayfalar/ana_menu(hasta).dart';
 import 'sayfalar/profil_sayfasi.dart';
@@ -76,13 +77,13 @@ class _enAltBarState extends State<enAltBar> with TickerProviderStateMixin {
         ),
         body: TabBarView(
             controller: _tabController,
-            children: [HastaPaneli(), Gorevler(), ProfilPage()]),
+            children: [HastaPaneli(), Gorevler(), Mesajlasma(), ProfilPage()]),
       ),
     );
   }
 }
 
-enum _MyTabViews { Ana_Menu, Gorevler, Profil_Sayfasi }
+enum _MyTabViews { Ana_Menu, Gorevler, Mesajlar, Profil_Sayfasi }
 
 AppBar girisUstBar(BuildContext context) {
   return AppBar(

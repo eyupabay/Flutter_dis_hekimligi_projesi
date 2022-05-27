@@ -16,8 +16,8 @@ class _GorevlerState extends State<Gorevler> {
       body: Container(
         width: 400,
         height: 300,
-        color: Colors.blue,
-        child: const Center(child: Text("Burada görevler yer alacak")),
+        color: Colors.green,
+        child: const Center(child: Text("Burada GÖREVLER yer alacak")),
       ),
     );
   }
