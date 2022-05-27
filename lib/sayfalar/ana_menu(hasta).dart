@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../hasta_bilgileri/hasta_sayfa_bilgileri.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import '../sayfa_duzenleri.dart';
@@ -14,7 +15,7 @@ class _HastaPaneliState extends State<HastaPaneli> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: menuUstBar(context),
+      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [

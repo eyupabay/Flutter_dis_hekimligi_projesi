@@ -6,4 +6,5 @@ class Stringler {
   static const karsila = "Hoşgeldiniz";
   static const kayitOlmaPaneli = "Kayıt olma Paneli";
   static const girisYap = "Giriş yap";
+  static const profilSayfasi = "Profil Sayfası";
 }

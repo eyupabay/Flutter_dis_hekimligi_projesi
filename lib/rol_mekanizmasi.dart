@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'sayfalar/ana_menu(doktor).dart';
 import 'sayfalar/ana_menu(hasta).dart';
 import 'sayfalar/login_page.dart';

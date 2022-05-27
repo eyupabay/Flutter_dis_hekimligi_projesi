@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
 import '../sayfa_duzenleri.dart';
 
@@ -13,7 +14,7 @@ class _MesajlasmaState extends State<Mesajlasma> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: girisUstBar(context),
+      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
       body: Container(
         width: 400,
         height: 300,

@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      appBar: girisUstBar(context),
+      appBar: ustBar(context: context, textYazisi: Stringler.karsila),
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(

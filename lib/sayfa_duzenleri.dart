@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/mesajlasma.dart';
-import 'logging/log_islemleri.dart';
 import 'sayfalar/ana_menu(hasta).dart';
 import 'sayfalar/profil_sayfasi.dart';
-import 'stringler.dart';
 
 /* BottomNavigationBar enAltBar(BuildContext context) {
   return BottomNavigationBar(
@@ -85,27 +83,18 @@ class _enAltBarState extends State<enAltBar> with TickerProviderStateMixin {
 
 enum _MyTabViews { Ana_Menu, Gorevler, Mesajlar, Profil_Sayfasi }
 
-AppBar girisUstBar(BuildContext context) {
-  return AppBar(
-    //Ekranın en üstünde bir bar açar
-    leadingWidth: double.infinity,
-    title: Center(
-      child: Text(
-        Stringler.uygulamaAdi,
-        //textAlign: TextAlign.center,
-        style: Theme.of(context).appBarTheme.titleTextStyle,
-      ),
-    ),
-  );
-}
-
-AppBar menuUstBar(BuildContext context) {
+AppBar ustBar(
+    {required BuildContext context,
+    required String textYazisi,
+    List<Widget>? aksiyon}) {
   return AppBar(
     backgroundColor: Theme.of(context).appBarTheme.shadowColor,
-    title: const Text(
-      Stringler.anaSayfa,
-      textAlign: TextAlign.center,
+    title: Center(
+      child: Text(
+        textYazisi,
+        textAlign: TextAlign.center,
+      ),
     ),
-    actions: const [CikisYap()],
+    actions: aksiyon,
   );
 }

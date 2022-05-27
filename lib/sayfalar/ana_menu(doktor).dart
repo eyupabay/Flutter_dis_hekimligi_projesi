@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import '../sayfa_duzenleri.dart';
 
@@ -14,7 +15,7 @@ class DoktorPanelState extends State<DoktorPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: menuUstBar(context),
+      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
       body: Column(
         children: [
           StreamBuilder(

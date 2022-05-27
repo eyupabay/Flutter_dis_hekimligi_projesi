@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../sayfa_duzenleri.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -13,24 +14,33 @@ class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: menuUstBar(context),
-      body: ElevatedButton(
-          onPressed: () {
-            const CikisYap();
-          },
-          style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            primary: Colors.blueAccent,
-          ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-          child: const Text(
-            "Çıkış yap",
-            textAlign: TextAlign.center,
-          )
-          //
-          //BURAYA ŞU AN İÇİN LOG OUT KISMI YAPILACAK.
-          //
+      appBar: ustBar(
+          context: context,
+          textYazisi: Stringler.profilSayfasi,
+          aksiyon: [const CikisYap()]),
+      body: Column(
+        children: [
+          Center(
+            child: ElevatedButton(
+                onPressed: () {
+                  const CikisYap();
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)),
+                  primary: Colors.blueAccent,
+                ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+                child: const Text(
+                  "Çıkış yap",
+                  textAlign: TextAlign.center,
+                )
+                //
+                //BURAYA ŞU AN İÇİN LOG OUT KISMI YAPILACAK.
+                //
+                ),
           ),
+        ],
+      ),
       /* bottomNavigationBar: enAltBar(context), */
     );
   }

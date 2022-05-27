@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
 import '../logging/log_islemleri.dart';
 import 'login_page.dart';
 import '../stringler.dart';
@@ -42,17 +43,7 @@ class _SigninPageState extends State<SigninPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        //Ekranın en üstünde bir bar açar
-        leadingWidth: double.infinity,
-        title: Center(
-          child: Text(
-            Stringler.uygulamaAdi,
-            //textAlign: TextAlign.center,
-            style: Theme.of(context).appBarTheme.titleTextStyle,
-          ),
-        ),
-      ),
+      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
