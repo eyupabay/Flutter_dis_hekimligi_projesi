@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
 import 'sayfalar/login_page.dart';
 
 void main() {
@@ -14,6 +16,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          tabBarTheme: const TabBarTheme(
+              labelColor: Colors.green,
+              unselectedLabelColor: Colors.grey,
+              indicatorSize: TabBarIndicatorSize.tab,
+              labelPadding: EdgeInsets.all(4.0)),
+          bottomAppBarTheme:
+              const BottomAppBarTheme(shape: CircularNotchedRectangle()),
           backgroundColor: Colors.blue[400],
           textTheme: TextTheme(
               headline4: const TextStyle(color: Colors.black),
@@ -48,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         future: _initializeFirebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return const LoginPage();
+            return const enAltBar();
           }
           return const Center(
             child: CircularProgressIndicator(),

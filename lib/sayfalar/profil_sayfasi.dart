@@ -31,7 +31,7 @@ class _ProfilPageState extends State<ProfilPage> {
           //BURAYA ŞU AN İÇİN LOG OUT KISMI YAPILACAK.
           //
           ),
-      bottomNavigationBar: enAltBar(context),
+      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 }

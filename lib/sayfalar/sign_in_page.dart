@@ -69,10 +69,18 @@ class _SigninPageState extends State<SigninPage> {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
-            textGirdileri(emailController, girisMailDekorasyonu(), true,
-                TextInputAction.next, false),
-            textGirdileri(passwordController, girisSifreDekorasyonu(), false,
-                TextInputAction.none, true),
+            textGirdileri(
+                alinacakBilgi: emailController,
+                dekorasyon: girisMailDekorasyonu(),
+                ilerleme: TextInputAction.next,
+                isAutofocus: true,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: passwordController,
+                dekorasyon: girisSifreDekorasyonu(),
+                ilerleme: TextInputAction.none,
+                isAutofocus: false,
+                isObscureText: true),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

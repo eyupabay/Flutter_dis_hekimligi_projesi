@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_uygulama_deniyorum/main.dart';
 
 TextField textGirdileri(
-    TextEditingController alinacakBilgi,
-    InputDecoration dekorasyon,
-    bool isAutofocus,
-    TextInputAction ilerleme,
-    bool isObscureText) {
+    {required TextEditingController alinacakBilgi,
+    required InputDecoration dekorasyon,
+    required bool isAutofocus,
+    required TextInputAction ilerleme,
+    required bool isObscureText}) {
   return TextField(
     textInputAction: TextInputAction.next,
     obscureText: isObscureText,

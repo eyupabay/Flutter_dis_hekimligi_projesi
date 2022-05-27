@@ -18,8 +18,10 @@ class _HastaPaneliState extends State<HastaPaneli> {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
-          hastaVeriAvcisi(yemek, yiyecekDekorasyonu()),
-          hastaVeriAvcisi(icecek, icecekDekorasyonu()),
+          hastaVeriAvcisi(
+              eklenecekVeri: yemek, veriDekorasyonu: yiyecekDekorasyonu()),
+          hastaVeriAvcisi(
+              eklenecekVeri: icecek, veriDekorasyonu: yiyecekDekorasyonu()),
           ElevatedButton(
             onPressed: yeIcVeriEkle,
             style: ElevatedButton.styleFrom(
@@ -45,7 +47,7 @@ class _HastaPaneliState extends State<HastaPaneli> {
           ),
         ]),
       ),
-      bottomNavigationBar: enAltBar(context),
+      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 }

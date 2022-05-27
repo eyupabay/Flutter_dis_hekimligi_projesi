@@ -83,7 +83,7 @@ class DoktorPanelState extends State<DoktorPanel> {
               }),
         ],
       ),
-      bottomNavigationBar: enAltBar(context),
+      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 

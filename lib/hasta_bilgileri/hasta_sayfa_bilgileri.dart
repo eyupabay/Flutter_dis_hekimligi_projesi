@@ -6,7 +6,8 @@ Future<void> yeIcVeriEkle() async {
 }
 
 TextField hastaVeriAvcisi(
-    TextEditingController eklenecekVeri, InputDecoration veriDekorasyonu) {
+    {required TextEditingController eklenecekVeri,
+    required InputDecoration veriDekorasyonu}) {
   return TextField(
       controller: eklenecekVeri,
       keyboardType: TextInputType.text,

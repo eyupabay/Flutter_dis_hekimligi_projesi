@@ -84,10 +84,18 @@ class _LoginPageState extends State<LoginPage> {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
-            textGirdileri(emailController, girisMailDekorasyonu(), true,
-                TextInputAction.next, false),
-            textGirdileri(passwordController, girisSifreDekorasyonu(), false,
-                TextInputAction.none, true),
+            textGirdileri(
+                alinacakBilgi: emailController,
+                dekorasyon: girisMailDekorasyonu(),
+                ilerleme: TextInputAction.next,
+                isAutofocus: true,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: passwordController,
+                dekorasyon: girisSifreDekorasyonu(),
+                ilerleme: TextInputAction.none,
+                isAutofocus: false,
+                isObscureText: true),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -126,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                 print(user);
                 if (user != null) {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HastaPaneli()));
+                      builder: (context) => const enAltBar()));
                   //Navigate ile ilerideki sayfaya yönlendirdik.
                 }
               },
