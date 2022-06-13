@@ -6,38 +6,78 @@ import '../logging/log_islemleri.dart';
 import 'login_page.dart';
 import '../stringler.dart';
 
-class SigninPage extends StatefulWidget {
-  const SigninPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  _SigninPageState createState() => _SigninPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SigninPageState extends State<SigninPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     //textfield controller
-    TextEditingController emailController =
+    TextEditingController emailControllerHasta =
         TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    TextEditingController passwordController =
+    TextEditingController passwordControllerHasta =
         TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
 
-    Future<void> kayitol() async {
+    Future<void> kayitolHasta() async {
       //HASTALAR İÇİN
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
-              email: emailController.text,
-              password: passwordController.text)
+              email: emailControllerHasta.text,
+              password: passwordControllerHasta.text)
           .then((kullanici) {
         FirebaseFirestore.instance
             .collection("Musteriler")
-            .doc(emailController.text)
+            .doc(emailControllerHasta.text)
             .set({
           "role": "hasta",
-          "Email": emailController.text
+          "Email": emailControllerHasta.text
         }).whenComplete(() => print(
-                "Kullanıcı oluşturulup veritabanında Musteriler koleksiyonuna hasta profili ekledi."));
+                "Kullanıcı oluşturulup veritabanında Hastalar koleksiyonuna hasta profili ekledi."));
+      }).whenComplete(() => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const LoginPage())));
+    }
+
+    Future<void> kayitolHasta2() async {
+      //HASTALAR İÇİN
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
+              email: emailControllerHasta.text,
+              password: passwordControllerHasta.text)
+          .then((kullanici) {
+        FirebaseFirestore.instance.collection("Doktorlar").get().whenComplete(
+            () => print(
+                "Kullanıcı oluşturulup veritabanında Hastalar koleksiyonuna hasta profili ekledi."));
+      }).whenComplete(() => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const LoginPage())));
+    }
+
+    TextEditingController emailControllerDoktor =
+        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+    TextEditingController passwordControllerDoktor =
+        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+
+    Future<void> kayitolDoktor() async {
+      //HASTALAR İÇİN
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
+              email: emailControllerDoktor.text,
+              password: passwordControllerDoktor.text)
+          .then((kullanici) {
+        FirebaseFirestore.instance
+            .collection("Doktorlar")
+            .doc(emailControllerDoktor.text)
+            .set({
+          "role": "doktor",
+          "Email": emailControllerDoktor.text
+        }).whenComplete(() => print(
+                "Kullanıcı oluşturulup veritabanında Doktorlar koleksiyonuna hasta profili ekledi."));
       }).whenComplete(() => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const LoginPage())));
     }
@@ -56,18 +96,18 @@ class _SigninPageState extends State<SigninPage> {
               child: Image.asset('assets/images/tooth.png'),
             ),
             Text(
-              Stringler.kayitOlmaPaneli,
+              Stringler.doktorKaydi,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
             textGirdileri(
-                alinacakBilgi: emailController,
+                alinacakBilgi: emailControllerDoktor,
                 dekorasyon: girisMailDekorasyonu(),
                 ilerleme: TextInputAction.next,
                 isAutofocus: true,
                 isObscureText: false),
             textGirdileri(
-                alinacakBilgi: passwordController,
+                alinacakBilgi: passwordControllerDoktor,
                 dekorasyon: girisSifreDekorasyonu(),
                 ilerleme: TextInputAction.none,
                 isAutofocus: false,
@@ -101,7 +141,7 @@ class _SigninPageState extends State<SigninPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
               ),
-              onPressed: kayitol,
+              onPressed: kayitolDoktor,
               child: Text(
                 Stringler.kayitOl,
                 style: Theme.of(context).textTheme.bodyText1,

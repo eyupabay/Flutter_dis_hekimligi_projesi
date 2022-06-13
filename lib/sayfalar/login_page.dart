@@ -39,33 +39,88 @@ class _LoginPageState extends State<LoginPage> {
     return user;
   }
 
+  //textfield controller
+  TextEditingController emailController =
+      TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+  TextEditingController passwordController =
+      TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+
+  Future getDataDoktor() async {
+    var querySnapshot =
+        await FirebaseFirestore.instance.collection('Doktorlar').get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      if (emailController.text == querySnapshot.docs[i]["Email"]) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const EnAltBarDoktor()));
+      } else {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Hata'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: const <Widget>[
+                    Text('Bir hata ile karşılaştınız'),
+                    Text('Would you like to approve of this message?'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Approve'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+  }
+
+  Future getDataHasta() async {
+    var querySnapshot =
+        await FirebaseFirestore.instance.collection('Musteriler').get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      if (emailController.text == querySnapshot.docs[i]["Email"]) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const EnAltBar()));
+      } else {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Hata'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: const <Widget>[
+                    Text('Bir hata ile karşılaştınız'),
+                    Text('Yanlış butona basmış olabilirsiniz.'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('TAMAM'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    //textfield controller
-    TextEditingController emailController =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    TextEditingController passwordController =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-
-    Future<void> kayitol() async {
-      //HASTALAR İÇİN
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
-              email: emailController.text,
-              password: passwordController.text)
-          .then((kullanici) {
-        FirebaseFirestore.instance
-            .collection("Musteriler")
-            .doc(emailController.text)
-            .set({
-          "role": "hasta",
-          "Email": emailController.text
-        }).whenComplete(() => print(
-                "Kullanıcı oluşturulup veritabanında Musteriler koleksiyonuna hasta profili ekledi."));
-      });
-    }
-
     return Scaffold(
       appBar: ustBar(context: context, textYazisi: Stringler.karsila),
       body: Padding(
@@ -102,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const SigninPage()));
+                        builder: (context) => const SignUpPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -117,32 +172,58 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Color(Theme.of(context).backgroundColor.blue),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  fixedSize: const Size(170, 60),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14))),
-              onPressed: () async {
-                /* const KararYeri(); */
-                User? user = await emailsifreGiris(
-                    email: emailController.text,
-                    password: passwordController.text,
-                    context: context);
-                print(user);
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const EnAltBar()));
-                  //Navigate ile ilerideki sayfaya yönlendirdik.
-                }
-              },
-              child: Text(
-                Stringler.girisYap,
-                style: Theme.of(context).textTheme.bodyText1,
-                textScaleFactor: 1.2,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(Theme.of(context).backgroundColor.blue),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      fixedSize: const Size(140, 60),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14))),
+                  onPressed: () async {
+                    User? user = await emailsifreGiris(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        context: context);
+                    print(user);
+                    if (user != null) {
+                      return getDataDoktor();
+                    }
+                  },
+                  child: Text(
+                    "Doktor Girişi",
+                    style: Theme.of(context).textTheme.bodyText1,
+                    textScaleFactor: 1.2,
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(Theme.of(context).backgroundColor.blue),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      fixedSize: const Size(140, 60),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14))),
+                  onPressed: () async {
+                    User? user = await emailsifreGiris(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        context: context);
+                    print(user);
+                    if (user != null) {
+                      return getDataHasta();
+                    }
+                  },
+                  child: Text(
+                    "Hasta Girişi",
+                    style: Theme.of(context).textTheme.bodyText1,
+                    textScaleFactor: 1.2,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

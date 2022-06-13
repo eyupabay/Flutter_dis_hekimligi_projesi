@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_register.dart';
+import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import '../sayfa_duzenleri.dart';
@@ -15,7 +18,10 @@ class DoktorPanelState extends State<DoktorPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
+      appBar: ustBar(
+          context: context,
+          textYazisi: Stringler.uygulamaAdi,
+          aksiyon: const [HastaEklemeButonu()]),
       body: Column(
         children: [
           StreamBuilder(
@@ -84,9 +90,11 @@ class DoktorPanelState extends State<DoktorPanel> {
               }),
         ],
       ),
-      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 
-  Query hastalarRef = FirebaseFirestore.instance.collection("Musteriler");
+  Query hastalarRef = FirebaseFirestore.instance
+      .collection("Doktorlar")
+      .doc(auth.currentUser!.email)
+      .collection("Hastalar");
 }

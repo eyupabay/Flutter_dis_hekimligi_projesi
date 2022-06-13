@@ -13,4 +13,6 @@ class Stringler {
   static const gorevler = "Görevler";
   static const mesajlar = "Mesajlar";
   static const cikisYap = "Çıkış yap";
+  static const kaydet = "Kaydet";
+  static const doktorKaydi = "Doktor Kaydı";
 }

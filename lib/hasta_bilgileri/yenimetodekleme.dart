@@ -6,8 +6,21 @@ final yemek = TextEditingController();
 final icecek = TextEditingController();
 
 FirebaseAuth auth = FirebaseAuth.instance;
+/* 
+Future<String?> doktorOgren() async {
+  var doktorMaili;
+  var atanilanDoktorunMaili =
+      await FirebaseFirestore.instance.collection('Doktorlar').get();
+  for (int i = 0; i < atanilanDoktorunMaili.docs.length; i++) {
+    if (auth.currentUser!.email.toString() ==
+        atanilanDoktorunMaili.docs[i]["AtananHasta"]) {
+      return atanilanDoktorunMaili.docs[i] = doktorMaili;
+    }
+  }
+  return null;
+} */
 
-Future<void> doktoraAtananVeriyiEkle() async {
+Future<void> doktoraAtananYiyecekVeriEkleme() async {
   var atanilanDoktorunMaili =
       await FirebaseFirestore.instance.collection('Doktorlar').get();
   for (int i = 0; i < atanilanDoktorunMaili.docs.length; i++) {
@@ -30,14 +43,71 @@ Future<void> doktoraAtananVeriyiEkle() async {
   }
 }
 
-Query yiyeceklerRef = FirebaseFirestore.instance
-    .collection("Musteriler")
+Future<void> doktoraAtananIcecekVeriEkleme() async {
+  var atanilanDoktorunMaili =
+      await FirebaseFirestore.instance.collection('Doktorlar').get();
+  for (int i = 0; i < atanilanDoktorunMaili.docs.length; i++) {
+    if (auth.currentUser!.email.toString() ==
+        atanilanDoktorunMaili.docs[i]["AtananHasta"]) {
+      FirebaseFirestore.instance
+          .collection("Doktorlar")
+          .doc(atanilanDoktorunMaili.toString())
+          .collection("Hastalar")
+          .doc(auth.currentUser!.email)
+          .collection("İçecekler")
+          .doc()
+          .set({
+        "KullaniciUID": auth.currentUser!.uid,
+        "Yemek": icecek.text,
+        "Saat": DateTime.now().toString()
+      }).whenComplete(() => print(
+              "${auth.currentUser!.email} kullanıcısı yiyecek verisi ekledi."));
+    }
+  }
+}
+
+Future<void> doktoraAtananYiyecekDinleme() async {
+  var atanilanDoktorunMaili =
+      await FirebaseFirestore.instance.collection('Doktorlar').get();
+  for (int i = 0; i < atanilanDoktorunMaili.docs.length; i++) {
+    if (auth.currentUser!.email.toString() ==
+        atanilanDoktorunMaili.docs[i]["AtananHasta"]) {
+      FirebaseFirestore.instance
+          .collection("Doktorlar")
+          .doc(atanilanDoktorunMaili.toString())
+          .collection("Hastalar")
+          .doc(auth.currentUser!.email)
+          .collection("Yiyecekler")
+          .orderBy("Saat", descending: true);
+    }
+  }
+}
+
+Future<void> doktoraAtananIcecekDinleme() async {
+  var atanilanDoktorunMaili =
+      await FirebaseFirestore.instance.collection('Doktorlar').get();
+  for (int i = 0; i < atanilanDoktorunMaili.docs.length; i++) {
+    if (auth.currentUser!.email.toString() ==
+        atanilanDoktorunMaili.docs[i]["AtananHasta"]) {
+      FirebaseFirestore.instance
+          .collection("Doktorlar")
+          .doc(atanilanDoktorunMaili.toString())
+          .collection("Hastalar")
+          .doc(auth.currentUser!.email)
+          .collection("İçecekler")
+          .orderBy("Saat", descending: true);
+    }
+  }
+}
+/* 
+Query yiyeceklerRef_yeni = FirebaseFirestore.instance
+    .collection("Doktorlar")
     .doc(FirebaseAuth.instance.currentUser!.email)
     .collection("Yiyecekler")
     .orderBy("Saat", descending: true);
 
-Query iceceklerRef = FirebaseFirestore.instance
-    .collection("Musteriler")
+Query iceceklerRef_yeni = FirebaseFirestore.instance
+    .collection("Doktorlar")
     .doc(FirebaseAuth.instance.currentUser!.email)
     .collection("İçecekler")
     .orderBy("Saat", descending: true);
@@ -125,3 +195,4 @@ class HastaBilgileriOkuma extends StatelessWidget {
         });
   }
 }
+ */

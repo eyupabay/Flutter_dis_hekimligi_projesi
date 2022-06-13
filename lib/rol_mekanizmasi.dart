@@ -9,39 +9,35 @@ class KararYeri extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
+    return Scaffold();
+    //FutureBuilder olarak değiştir
+    //future yerine firebase içerisindeki tüm verileri gezme metodunu ata
+    /* return FutureBuilder(
+        future: getData(),
+        builder: (context, AsyncSnapshot snapshot) {
           print("StreamBuilder baslatıldı.");
           if (snapshot.hasData && snapshot.data != null) {
             print("snapshot'ların icerisinin bos olmadıgı gozlemlendi.");
-            return StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection("Musteriler")
-                  .doc(FirebaseAuth.instance.currentUser!.email)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.data != null) {
-                  final userDoc = snapshot.data;
-                  final user = userDoc!;
-                  if (user['role'] == "doktor") {
-                    print("Doktor giriş yaptı.");
-                    return const EnAltBarDoktor();
-                  } else {
-                    print("Hasta giriş yaptı.");
-                    return const EnAltBar();
-                  }
-                } else {
-                  return const Material(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-              },
-            );
+
+            if (snapshot.hasData && snapshot.data != null) {
+              var userDoc = snapshot.data();
+              var user = userDoc!;
+              if (user["role"] == "doktor") {
+                print("Doktor giriş yaptı.");
+                return const EnAltBarDoktor();
+              } else {
+                print("Hasta giriş yaptı.");
+                return const EnAltBar();
+              }
+            } else {
+              return const Material(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
           }
           return const LoginPage();
-        });
+        }); */
   }
 }

@@ -24,7 +24,9 @@ class _HastaPaneliState extends State<HastaPaneli> {
           hastaVeriAvcisi(
               eklenecekVeri: icecek, veriDekorasyonu: yiyecekDekorasyonu()),
           ElevatedButton(
-            onPressed: yeIcVeriEkle,
+            onPressed: () async {
+              doktoraAtananVeriyiEkle();
+            },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14)),
@@ -35,7 +37,7 @@ class _HastaPaneliState extends State<HastaPaneli> {
               style: TextStyle(color: Colors.white),
             ),
           ),
-          HastaBilgileriOkuma(
+          /*   HastaBilgileriOkuma(
             okunacakBilgi: yiyeceklerRef,
             okunacakBilgiKlasoru: "Yemek",
           ),
@@ -45,7 +47,7 @@ class _HastaPaneliState extends State<HastaPaneli> {
           HastaBilgileriOkuma(
             okunacakBilgi: iceceklerRef,
             okunacakBilgiKlasoru: "İçecek",
-          ),
+          ), */
         ]),
       ),
       /* bottomNavigationBar: enAltBar(context), */

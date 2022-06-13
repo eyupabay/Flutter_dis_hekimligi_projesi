@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_register.dart';
 import 'package:flutter_uygulama_deniyorum/main.dart';
 
 TextField textGirdileri(
@@ -54,6 +55,23 @@ class CikisYap extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const HomePage()));
       },
       icon: const Icon(Icons.logout_sharp),
+    );
+  }
+}
+
+class HastaEklemeButonu extends StatelessWidget {
+  const HastaEklemeButonu({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const KayitEtHasta()));
+      },
+      icon: const Icon(Icons.add),
     );
   }
 }
