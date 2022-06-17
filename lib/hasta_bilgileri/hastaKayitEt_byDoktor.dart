@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
-import 'sayfalar/ana_menu(doktor).dart';
+import '../sayfalar/ana_menu(doktor).dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
-import 'logging/log_islemleri.dart';
+import '../logging/log_islemleri.dart';
 
 class KayitEtHasta extends StatefulWidget {
   const KayitEtHasta({Key? key}) : super(key: key);
@@ -54,6 +54,12 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
           .set({"Email": emailController.text, "role": "hasta"})
           .whenComplete(() => print(
               "${emailController.text} kullanıcısı doktorun koleksiyonuna eklendi."))
+          .whenComplete(() => FirebaseFirestore.instance
+              .collection("Hastalar")
+              .doc(emailController.text)
+              .set({"Email": emailController.text, "role": "hasta"}))
+          .whenComplete(() => print(
+              "${emailController.text} kullanıcısı Hastalar koleksiyonuna eklendi."))
           .whenComplete(() => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const EnAltBarDoktor())));
     }
@@ -72,7 +78,7 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
               child: Image.asset('assets/images/tooth.png'),
             ),
             Text(
-              Stringler.kayitOlmaPaneli,
+              "Hasta kayıt et",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),

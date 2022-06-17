@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/hastaKayitEt_byDoktor.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaKayitEt_byDoktor.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
@@ -48,8 +48,24 @@ class DoktorPanelState extends State<DoktorPanel> {
                                   fontSize: 14.0, letterSpacing: 1.2),
                             ),
                             trailing: IconButton(
-                                onPressed: () {
-                                  StreamBuilder(
+                                onPressed: () async {
+                                  final tiklanilanHasta = listofDocsSnap[index]
+                                      .reference
+                                      .toString();
+                                  print(tiklanilanHasta);
+                                  /* Query doktorYiyeceklerRef = FirebaseFirestore
+                                      .instance
+                                      .collection("Hastalar")
+                                      .doc(tiklanilanHasta)
+                                      .collection("Yiyecekler")
+                                      .orderBy("Saat", descending: true);
+                                  Query doktorIceceklerRef = FirebaseFirestore
+                                      .instance
+                                      .collection("Hastalar")
+                                      .doc(tiklanilanHasta)
+                                      .collection("İçecekler")
+                                      .orderBy("Saat", descending: true); */
+                                  /* StreamBuilder(
                                       stream: yiyeceklerRef.snapshots(),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<QuerySnapshot>
@@ -81,7 +97,7 @@ class DoktorPanelState extends State<DoktorPanel> {
                                                 );
                                               }),
                                         );
-                                      });
+                                      }); */
                                 },
                                 icon: const Icon(Icons.navigate_next)),
                           ),

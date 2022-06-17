@@ -21,7 +21,7 @@ Future<void> hastaVeriEkle() async {
         .doc()
         .set({
       "KullaniciUID": auth.currentUser!.uid,
-      "yemekler": yemekler.text,
+      "Yemek": yemekler.text,
       "Saat": DateTime.now().toString()
     }).whenComplete(() => print(
             "${auth.currentUser!.email} kullanıcısı yiyecek verisi ekledi."));

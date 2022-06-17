@@ -31,13 +31,13 @@ FirebaseAuth auth = FirebaseAuth.instance;
 } */
 
 Query yiyeceklerRef = FirebaseFirestore.instance
-    .collection("Musteriler")
+    .collection("Hastalar")
     .doc(FirebaseAuth.instance.currentUser!.email)
     .collection("Yiyecekler")
     .orderBy("Saat", descending: true);
 
 Query iceceklerRef = FirebaseFirestore.instance
-    .collection("Musteriler")
+    .collection("Hastalar")
     .doc(FirebaseAuth.instance.currentUser!.email)
     .collection("İçecekler")
     .orderBy("Saat", descending: true);
@@ -54,31 +54,22 @@ class HastaBilgileriOkuma extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: okunacakBilgi
-            .snapshots(), //yiyeceklerRef değişkenindeki tüm verileri çek
+        stream: okunacakBilgi.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.data == null) {
-            //Veri çekilene kadar dönen çarkta loading ekranı ver
             return const CircularProgressIndicator();
           }
           List<DocumentSnapshot> listofDocsSnap = snapshot.data!.docs;
-          //Hedefte gösterdiğimiz verilerin dökümanlarını dinle
           return Flexible(
             child: ListView.builder(
-                //Ekranda verileri listelemesi için yapı oluşturucu
-                itemCount: listofDocsSnap
-                    .length, //Verilerin uzunluğu(listede veri kadar kaplayacak uzunluk)
+                itemCount: listofDocsSnap.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    //Kart şeklinde gözükmesi için
                     color: Theme.of(context).cardColor,
                     elevation: 2.0,
                     child: ListTile(
-                      //Liste oluşturulsun ve istediğimiz gibi aşağı kaydırabilelim
                       title: Text(
                         listofDocsSnap[index].get(okunacakBilgiKlasoru),
-                        //  Yiyecekleri dinlemek istediğimiz için veritabanında dökümanların her bir
-                        //indeksindeki ".get()" fonksiyonu ile istediğimiz alandaki veriyi çekiyoruz.
                         style:
                             const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
                       ),

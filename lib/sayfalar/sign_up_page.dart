@@ -43,7 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
               MaterialPageRoute(builder: (context) => const LoginPage())));
     }
 
-// Sonradan geliştirmeye çalıştırdığımız doktora atama emri.
+/* // Sonradan geliştirmeye çalıştırdığımız doktora atama emri.
     Future<void> kayitolHasta2() async {
       //HASTALAR İÇİN
       await FirebaseAuth.instance
@@ -58,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
       }).whenComplete(() => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const LoginPage())));
     }
-
+ */
     TextEditingController emailControllerDoktor =
         TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
     TextEditingController passwordControllerDoktor =
@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Image.asset('assets/images/tooth.png'),
             ),
             Text(
-              Stringler.doktorKaydi,
+              "Kayıt ol",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
@@ -134,21 +134,42 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color(Theme.of(context).backgroundColor.blue),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                fixedSize: const Size(170, 60),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14)),
-              ),
-              onPressed: kayitolDoktor,
-              child: Text(
-                Stringler.kayitOl,
-                style: Theme.of(context).textTheme.bodyText1,
-                textScaleFactor: 1.2,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(Theme.of(context).backgroundColor.blue),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    fixedSize: const Size(140, 60),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                  onPressed: kayitolDoktor,
+                  child: Text(
+                    "Hasta kaydı",
+                    style: Theme.of(context).textTheme.bodyText1,
+                    textScaleFactor: 1.2,
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(Theme.of(context).backgroundColor.blue),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    fixedSize: const Size(140, 60),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                  onPressed: kayitolDoktor,
+                  child: Text(
+                    "Doktor kaydı",
+                    style: Theme.of(context).textTheme.bodyText1,
+                    textScaleFactor: 1.2,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
