@@ -2,20 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
-import '../rol_mekanizmasi.dart';
-import '../sayfa_duzenleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
+import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_hasta.dart';
+import 'package:flutter_uygulama_deniyorum/rol_mekanizmasi.dart';
 import '../stringler.dart';
 import 'ana_menu(hasta).dart';
 import 'sign_up_page.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   //Giris fonksiyonları
   static Future<User?> emailsifreGiris(
       {required String email,
@@ -44,6 +46,42 @@ class _LoginPageState extends State<LoginPage> {
       TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
   TextEditingController passwordController =
       TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+  Future getDataHasta() async {
+    var querySnapshot =
+        await FirebaseFirestore.instance.collection('Hastalar').get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      if (emailController.text == querySnapshot.docs[i]["Email"]) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const EnAltBar()));
+      } else {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Hata'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: const <Widget>[
+                    Text('Bir hata ile karşılaştınız'),
+                    Text('Yanlış butona basmış olabilirsiniz.'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('TAMAM'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+  }
 
   Future getDataDoktor() async {
     var querySnapshot =
@@ -70,43 +108,6 @@ class _LoginPageState extends State<LoginPage> {
               actions: <Widget>[
                 TextButton(
                   child: const Text('Approve'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    }
-  }
-
-  Future getDataHasta() async {
-    var querySnapshot =
-        await FirebaseFirestore.instance.collection('Musteriler').get();
-    for (int i = 0; i < querySnapshot.docs.length; i++) {
-      if (emailController.text == querySnapshot.docs[i]["Email"]) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const EnAltBar()));
-      } else {
-        return showDialog<void>(
-          context: context,
-          barrierDismissible: false, // user must tap button!
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Hata'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: const <Widget>[
-                    Text('Bir hata ile karşılaştınız'),
-                    Text('Yanlış butona basmış olabilirsiniz.'),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('TAMAM'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

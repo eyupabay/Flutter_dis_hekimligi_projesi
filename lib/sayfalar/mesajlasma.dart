@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
-
-import '../sayfa_duzenleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class Mesajlasma extends StatefulWidget {
   const Mesajlasma({Key? key}) : super(key: key);

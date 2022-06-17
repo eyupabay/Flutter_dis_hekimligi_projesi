@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
 import '../logging/log_islemleri.dart';
 import 'login_page.dart';
 import '../stringler.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -22,6 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController passwordControllerHasta =
         TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
 
+// İlk yaptığımız hasta kaydolma paneli ve ardından Firestore un Hastalar koleksiyonunda döküman açma emri.
     Future<void> kayitolHasta() async {
       //HASTALAR İÇİN
       await FirebaseAuth.instance
@@ -31,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
               password: passwordControllerHasta.text)
           .then((kullanici) {
         FirebaseFirestore.instance
-            .collection("Musteriler")
+            .collection("Hastalar")
             .doc(emailControllerHasta.text)
             .set({
           "role": "hasta",
@@ -42,6 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
               MaterialPageRoute(builder: (context) => const LoginPage())));
     }
 
+// Sonradan geliştirmeye çalıştırdığımız doktora atama emri.
     Future<void> kayitolHasta2() async {
       //HASTALAR İÇİN
       await FirebaseAuth.instance

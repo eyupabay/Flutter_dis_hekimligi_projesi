@@ -7,7 +7,7 @@ final icecek = TextEditingController();
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
-Future<void> doktoraAtananVeriyiEkle() async {
+/* Future<void> doktoraAtananVeriyiEkle() async {
   var atanilanDoktorunMaili =
       await FirebaseFirestore.instance.collection('Doktorlar').get();
   for (int i = 0; i < atanilanDoktorunMaili.docs.length; i++) {
@@ -28,7 +28,7 @@ Future<void> doktoraAtananVeriyiEkle() async {
               "${auth.currentUser!.email} kullanıcısı yiyecek verisi ekledi."));
     }
   }
-}
+} */
 
 Query yiyeceklerRef = FirebaseFirestore.instance
     .collection("Musteriler")
@@ -41,36 +41,6 @@ Query iceceklerRef = FirebaseFirestore.instance
     .doc(FirebaseAuth.instance.currentUser!.email)
     .collection("İçecekler")
     .orderBy("Saat", descending: true);
-
-Future<void> veriEkle() async {
-  if (yemek.text != "") {
-    FirebaseFirestore.instance
-        .collection("Musteriler")
-        .doc(auth.currentUser!.email)
-        .collection("Yiyecekler")
-        .doc()
-        .set({
-      "KullaniciUID": auth.currentUser!.uid,
-      "Yemek": yemek.text,
-      "Saat": DateTime.now().toString()
-    }).whenComplete(() => print(
-            "${auth.currentUser!.email} kullanıcısı yiyecek verisi ekledi."));
-  }
-
-  if (icecek.text != "") {
-    FirebaseFirestore.instance
-        .collection("Musteriler")
-        .doc(auth.currentUser!.email)
-        .collection("İçecekler")
-        .doc()
-        .set({
-      "KullaniciUID": auth.currentUser!.uid,
-      "İçecek": icecek.text,
-      "Saat": DateTime.now().toString()
-    }).whenComplete(() => print(
-            "${auth.currentUser!.email} kullanıcısı içecek verisi ekledi."));
-  }
-}
 
 class HastaBilgileriOkuma extends StatelessWidget {
   const HastaBilgileriOkuma({

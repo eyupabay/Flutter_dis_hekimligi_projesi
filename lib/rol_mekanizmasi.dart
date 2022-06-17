@@ -1,11 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
-import 'sayfalar/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
+import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_hasta.dart';
+import '../rol_mekanizmasi.dart';
+import '../stringler.dart';
+import "package:flutter_uygulama_deniyorum/sayfalar/ana_menu(hasta).dart";
+import 'package:flutter_uygulama_deniyorum/sayfalar/sign_up_page.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class KararYeri extends StatelessWidget {
-  const KararYeri({Key? key}) : super(key: key);
+  KararYeri({Key? key}) : super(key: key);
+
+  TextEditingController emailController =
+      TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+  TextEditingController passwordController =
+      TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
 
   @override
   Widget build(BuildContext context) {

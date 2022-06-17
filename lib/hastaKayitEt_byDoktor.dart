@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
-import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'sayfalar/ana_menu(doktor).dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 import 'logging/log_islemleri.dart';
 

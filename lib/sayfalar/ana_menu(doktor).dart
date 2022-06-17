@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_register.dart';
+import 'package:flutter_uygulama_deniyorum/hastaKayitEt_byDoktor.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
-import '../sayfa_duzenleri.dart';
 
 class DoktorPanel extends StatefulWidget {
   const DoktorPanel({Key? key}) : super(key: key);
@@ -22,6 +22,7 @@ class DoktorPanelState extends State<DoktorPanel> {
           context: context,
           textYazisi: Stringler.uygulamaAdi,
           aksiyon: const [HastaEklemeButonu()]),
+      //Hastaları doktorun olduğu koleksiyonda, Hastalar adlı klasörün içerisine sadece email ismini kaydediyoruz.
       body: Column(
         children: [
           StreamBuilder(

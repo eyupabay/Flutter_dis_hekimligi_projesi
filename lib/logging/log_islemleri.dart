@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_register.dart';
+import 'package:flutter_uygulama_deniyorum/hastaKayitEt_byDoktor.dart';
+import 'package:flutter_uygulama_deniyorum/hastaKayitEt_byDoktor.dart';
 import 'package:flutter_uygulama_deniyorum/main.dart';
 
 TextField textGirdileri(

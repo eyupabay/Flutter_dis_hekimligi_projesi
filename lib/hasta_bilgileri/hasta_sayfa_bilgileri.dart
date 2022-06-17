@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
 import 'yiyecek_ve_icecek_okuma.dart';
-
-Future<void> yeIcVeriEkle() async {
-  veriEkle().then((value) => {yemek.clear(), icecek.clear()});
-}
 
 TextField hastaVeriAvcisi(
     {required TextEditingController eklenecekVeri,

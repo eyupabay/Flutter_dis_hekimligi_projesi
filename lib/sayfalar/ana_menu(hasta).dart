@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../hasta_bilgileri/hasta_sayfa_bilgileri.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
-import '../sayfa_duzenleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class HastaPaneli extends StatefulWidget {
   const HastaPaneli({Key? key}) : super(key: key);
@@ -20,12 +21,12 @@ class _HastaPaneliState extends State<HastaPaneli> {
         padding: const EdgeInsets.all(12),
         child: Column(children: [
           hastaVeriAvcisi(
-              eklenecekVeri: yemek, veriDekorasyonu: yiyecekDekorasyonu()),
+              eklenecekVeri: yemekler, veriDekorasyonu: yiyecekDekorasyonu()),
           hastaVeriAvcisi(
-              eklenecekVeri: icecek, veriDekorasyonu: yiyecekDekorasyonu()),
+              eklenecekVeri: icecekler, veriDekorasyonu: yiyecekDekorasyonu()),
           ElevatedButton(
             onPressed: () async {
-              doktoraAtananVeriyiEkle();
+              hastaVeriEkle();
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(

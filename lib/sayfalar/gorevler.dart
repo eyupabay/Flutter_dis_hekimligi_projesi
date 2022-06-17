@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/sayfa_duzenleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class Gorevler extends StatefulWidget {
   const Gorevler({Key? key}) : super(key: key);
