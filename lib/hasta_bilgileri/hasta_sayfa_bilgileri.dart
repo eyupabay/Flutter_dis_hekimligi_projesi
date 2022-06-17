@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
-import 'yiyecek_ve_icecek_okuma.dart';
 
 TextField hastaVeriAvcisi(
     {required TextEditingController eklenecekVeri,

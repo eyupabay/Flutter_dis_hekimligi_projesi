@@ -1,6 +1,3 @@
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
-
 class Stringler {
   static const uygulamaAdi = "Diş Sağlığı Uygulaması";
   static const kullaniciGiris = "Kullanıcı girişi";

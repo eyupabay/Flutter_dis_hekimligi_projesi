@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/ana_menu(doktor).dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/mesajlasma.dart';
-import "package:flutter_uygulama_deniyorum/sayfalar/ana_menu(doktor).dart";
 import "package:flutter_uygulama_deniyorum/sayfalar/profil_sayfasi.dart";
 
 class EnAltBarDoktor extends StatefulWidget {

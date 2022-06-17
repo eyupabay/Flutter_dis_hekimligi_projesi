@@ -17,17 +17,13 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     //textfield controller
-    TextEditingController emailControllerHasta =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    TextEditingController passwordControllerHasta =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+    TextEditingController emailControllerHasta = TextEditingController();
+    TextEditingController passwordControllerHasta = TextEditingController();
 
-// İlk yaptığımız hasta kaydolma paneli ve ardından Firestore un Hastalar koleksiyonunda döküman açma emri.
     Future<void> kayitolHasta() async {
       //HASTALAR İÇİN
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
               email: emailControllerHasta.text,
               password: passwordControllerHasta.text)
           .then((kullanici) {
@@ -43,32 +39,14 @@ class _SignUpPageState extends State<SignUpPage> {
               MaterialPageRoute(builder: (context) => const LoginPage())));
     }
 
-/* // Sonradan geliştirmeye çalıştırdığımız doktora atama emri.
-    Future<void> kayitolHasta2() async {
-      //HASTALAR İÇİN
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
-              email: emailControllerHasta.text,
-              password: passwordControllerHasta.text)
-          .then((kullanici) {
-        FirebaseFirestore.instance.collection("Doktorlar").get().whenComplete(
-            () => print(
-                "Kullanıcı oluşturulup veritabanında Hastalar koleksiyonuna hasta profili ekledi."));
-      }).whenComplete(() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const LoginPage())));
-    }
- */
     TextEditingController emailControllerDoktor =
         TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
     TextEditingController passwordControllerDoktor =
         TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
 
     Future<void> kayitolDoktor() async {
-      //HASTALAR İÇİN
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
               email: emailControllerDoktor.text,
               password: passwordControllerDoktor.text)
           .then((kullanici) {

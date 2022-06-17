@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_hasta.dart';
-import 'package:flutter_uygulama_deniyorum/rol_mekanizmasi.dart';
 import '../stringler.dart';
-import 'ana_menu(hasta).dart';
 import 'sign_up_page.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
@@ -42,10 +40,9 @@ class LoginPageState extends State<LoginPage> {
   }
 
   //textfield controller
-  TextEditingController emailController =
-      TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-  TextEditingController passwordController =
-      TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   Future getDataHasta() async {
     var querySnapshot =
         await FirebaseFirestore.instance.collection('Hastalar').get();
@@ -56,7 +53,7 @@ class LoginPageState extends State<LoginPage> {
       } else {
         return showDialog<void>(
           context: context,
-          barrierDismissible: false, // user must tap button!
+          barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text('Hata'),
@@ -64,7 +61,6 @@ class LoginPageState extends State<LoginPage> {
                 child: ListBody(
                   children: const <Widget>[
                     Text('Bir hata ile karşılaştınız'),
-                    Text('Yanlış butona basmış olabilirsiniz.'),
                   ],
                 ),
               ),
@@ -93,7 +89,7 @@ class LoginPageState extends State<LoginPage> {
       } else {
         return showDialog<void>(
           context: context,
-          barrierDismissible: false, // user must tap button!
+          barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text('Hata'),
@@ -101,13 +97,12 @@ class LoginPageState extends State<LoginPage> {
                 child: ListBody(
                   children: const <Widget>[
                     Text('Bir hata ile karşılaştınız'),
-                    Text('Would you like to approve of this message?'),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Approve'),
+                  child: const Text('Tamam'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

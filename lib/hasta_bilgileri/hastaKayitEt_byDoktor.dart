@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
-import '../sayfalar/ana_menu(doktor).dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 import '../logging/log_islemleri.dart';
@@ -20,31 +18,8 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
   final girisYapanKullaniciMaili = auth.currentUser!.email.toString();
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    /* TextEditingController passwordController =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    Future<void> hastaKayitEt() async {
-      //HASTALAR İÇİN
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              //Email ile kullanıcı oluşturmak için kullanılan Firebase fonksiyonu
-              email: emailController.text,
-              password: passwordController.text)
-          .then((kullanici) {
-        FirebaseFirestore.instance
-            .collection("Doktorlar")
-            .doc(girisYapanKullaniciMaili)
-            .collection("Hastalar")
-            .doc(emailController.text)
-            .set({
-          "role": "hasta",
-          "Email": emailController.text,
-        }).whenComplete(() => print(
-                "Kullanıcı oluşturulup veritabanında Musteriler koleksiyonuna hasta profili ekledi."));
-      }).whenComplete(() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const EnAltBarDoktor())));
-    } */
+    TextEditingController emailController = TextEditingController();
+
     Future<void> hastaEntegreEt() async {
       FirebaseFirestore.instance
           .collection("Doktorlar")
@@ -88,12 +63,6 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
                 ilerleme: TextInputAction.next,
                 isAutofocus: true,
                 isObscureText: false),
-            /* textGirdileri(
-                alinacakBilgi: passwordController,
-                dekorasyon: girisSifreDekorasyonu(),
-                ilerleme: TextInputAction.none,
-                isAutofocus: false,
-                isObscureText: true), */
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Color(Theme.of(context).backgroundColor.blue),
