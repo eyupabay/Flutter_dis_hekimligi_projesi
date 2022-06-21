@@ -55,16 +55,3 @@ class _HastaPaneliState extends State<HastaPaneli> {
     );
   }
 }
-
-class BoslukOlustur extends StatelessWidget {
-  const BoslukOlustur({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 25.0,
-    );
-  }
-}

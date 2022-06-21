@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
+import "package:flutter_uygulama_deniyorum/hasta_bilgileri/yiyecek_ve_icecek_okuma.dart";
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
@@ -40,11 +42,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   child: const Text(
                     Stringler.cikisYap,
                     textAlign: TextAlign.center,
-                  )
-                  //
-                  //BURAYA ŞU AN İÇİN LOG OUT KISMI YAPILACAK.
-                  //
-                  ),
+                  )),
             ),
           ],
         ),

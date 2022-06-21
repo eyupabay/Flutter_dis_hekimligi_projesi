@@ -124,7 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
-                  onPressed: kayitolDoktor,
+                  onPressed: kayitolHasta,
                   child: Text(
                     "Hasta kaydı",
                     style: Theme.of(context).textTheme.bodyText1,

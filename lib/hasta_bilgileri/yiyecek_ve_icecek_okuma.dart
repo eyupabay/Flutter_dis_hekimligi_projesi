@@ -1,12 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/ana_menu(doktor).dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_listesi.dart';
 
 final yemek = TextEditingController();
 final icecek = TextEditingController();
 
 FirebaseAuth auth = FirebaseAuth.instance;
+
+var doktorMaili = StreamBuilder(
+    stream: FirebaseFirestore.instance
+        .collection('Hastalar')
+        .doc(auth.currentUser?.email)
+        .snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Text("Loading");
+      }
+      var userDocument = snapshot.data;
+      return Text(userDocument!["doktorMaili"]);
+    });
 
 Query doktorYiyeceklerRef = FirebaseFirestore.instance
     .collection("Hastalar")
@@ -33,14 +47,14 @@ Query iceceklerRef = FirebaseFirestore.instance
     .orderBy("Saat", descending: true);
 
 class HastaBilgileriOkuma extends StatelessWidget {
-  const HastaBilgileriOkuma({
+  HastaBilgileriOkuma({
     Key? key,
     required this.okunacakBilgi,
     required this.okunacakBilgiKlasoru,
   }) : super(key: key);
 
-  final Query<Object?> okunacakBilgi;
-  final String okunacakBilgiKlasoru;
+  late Query<Object?> okunacakBilgi;
+  late String okunacakBilgiKlasoru;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -78,14 +92,15 @@ class HastaBilgileriOkuma extends StatelessWidget {
 }
 
 class DoktordanHastaBilgileriOkuma extends StatelessWidget {
-  const DoktordanHastaBilgileriOkuma({
+  DoktordanHastaBilgileriOkuma({
     Key? key,
     required this.okunacakBilgi,
     required this.okunacakBilgiKlasoru,
   }) : super(key: key);
 
-  final Query<Object?> okunacakBilgi;
-  final String okunacakBilgiKlasoru;
+  late Query<Object?> okunacakBilgi;
+  late String okunacakBilgiKlasoru;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

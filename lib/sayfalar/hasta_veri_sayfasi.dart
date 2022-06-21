@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_sayfa_bilgileri.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_listesi.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
@@ -23,6 +23,7 @@ class HastaVeriSayfasi extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
+          Text(tiklanilanHasta),
           DoktordanHastaBilgileriOkuma(
             okunacakBilgi: doktorYiyeceklerRef,
             okunacakBilgiKlasoru: "Yemek",
