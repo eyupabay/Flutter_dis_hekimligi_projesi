@@ -3,18 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hasta_veri_sayfasi.dart';
 import 'firebaseBilgileriOkuma.dart';
 
-late String tiklanilanHasta;
-
 class HastaListesi extends StatefulWidget {
-  const HastaListesi({
-    Key? key,
-  }) : super(key: key);
-
   @override
   State<HastaListesi> createState() => _HastaListesiState();
 }
 
 class _HastaListesiState extends State<HastaListesi> {
+  late String tiklanilanHasta;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -43,10 +38,17 @@ class _HastaListesiState extends State<HastaListesi> {
                             tiklanilanHasta =
                                 listofDocsSnap[index].get("Email").toString();
                             print(tiklanilanHasta);
+                            DoktordanHastaBilgileriOkuma(
+                                okunacakBilgi: FirebaseFirestore.instance
+                                    .collection("Hastalar")
+                                    .doc(tiklanilanHasta)
+                                    .collection("Yiyecekler")
+                                    .orderBy("Saat", descending: true),
+                                okunacakBilgiKlasoru: "Yemek");
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const HastaVeriSayfasi()));
+                                    builder: (context) => HastaVeriSayfasi(
+                                        tiklanilanHasta: tiklanilanHasta)));
                           },
                           icon: const Icon(Icons.navigate_next)),
                     ),

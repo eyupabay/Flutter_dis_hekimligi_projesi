@@ -36,15 +36,12 @@ class _EnAltBarState extends State<EnAltBar> with TickerProviderStateMixin {
               indicatorColor: Colors.green,
               tabs: _MyTabViews.values.map((e) => Tab(text: e.name)).toList()),
         ),
-        body: TabBarView(controller: _tabController, children: const [
-          HastaPaneli(),
-          Gorevler(),
-          Mesajlasma(),
-          ProfilPage()
-        ]),
+        body: TabBarView(
+            controller: _tabController,
+            children: const [HastaPaneli(), Gorevler(), ProfilPage()]),
       ),
     );
   }
 }
 
-enum _MyTabViews { Ana_Menu, Gorevler, Mesajlar, Profil_Sayfasi }
+enum _MyTabViews { Menu, Gorevler, Profil }

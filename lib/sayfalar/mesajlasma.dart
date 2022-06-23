@@ -18,7 +18,7 @@ class _MesajlasmaState extends State<Mesajlasma> {
         width: 400,
         height: 300,
         color: Colors.blue,
-        child: const Center(child: Text("Burada MESAJLAR yer alacak")),
+        child: const Center(child: Text("Burada MESAJLAR yer almayacak.")),
       ),
     );
   }

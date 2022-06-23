@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_listesi.dart';
@@ -8,13 +9,15 @@ import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class gorevVer extends StatefulWidget {
-  const gorevVer({Key? key}) : super(key: key);
+  var tiklanilanHasta;
+  gorevVer({this.tiklanilanHasta});
 
   @override
   State<gorevVer> createState() => _gorevVerState();
 }
 
 class _gorevVerState extends State<gorevVer> {
+  /* late String tiklanilanHasta; */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,21 +27,39 @@ class _gorevVerState extends State<gorevVer> {
         basIkon: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const HastaVeriSayfasi()));
+                  builder: (context) => HastaVeriSayfasi(
+                        tiklanilanHasta: widget.tiklanilanHasta,
+                      )));
             },
             icon: const Icon(Icons.keyboard_arrow_left_sharp)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
-          Text(tiklanilanHasta),
+          /* Text(tiklanilanHasta), */
           doktorGorevAvcisi(
               eklenecekVeri: gorevler, veriDekorasyonu: gorevDekorasyonu()),
           DoktordanGorevleriOkuma(
-              okunacakBilgi: doktorGorevlerRef, okunacakBilgiKlasoru: "gorev"),
+              okunacakBilgi: FirebaseFirestore.instance
+                  .collection("Hastalar")
+                  .doc(widget.tiklanilanHasta)
+                  .collection("Gorevler")
+                  .orderBy("Saat", descending: true),
+              okunacakBilgiKlasoru: "gorev"),
           ElevatedButton(
               onPressed: () async {
-                gorevYaz();
+                if (gorevler.text != "") {
+                  FirebaseFirestore.instance
+                      .collection("Hastalar")
+                      .doc(widget.tiklanilanHasta)
+                      .collection("Gorevler")
+                      .doc()
+                      .set({"gorev": gorevler.text, "Saat": tarihGun})
+                      .whenComplete(() => print(
+                          "${widget.tiklanilanHasta} kullanıcısına görev verisi ekledi."))
+                      .then((value) => {gorevler.clear()});
+                }
+                /* gorevYaz(widget.tiklanilanHasta); */
               },
               child: Text("Gorev ver")),
         ]),

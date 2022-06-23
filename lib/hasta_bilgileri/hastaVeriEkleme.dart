@@ -18,9 +18,9 @@ Future<void> yeIcVeriEkle() async {
   hastaVeriEkle().then((value) => {yemekler.clear(), icecekler.clear()});
 }
 
-Future<void> gorevYaz() async {
+/* Future<void> gorevYaz() async {
   doktorGorevVer().then((value) => {gorevler.clear()});
-}
+} */
 
 Future<void> hastaVeriEkle() async {
   if (yemekler.text != "") {
@@ -51,8 +51,7 @@ Future<void> hastaVeriEkle() async {
             "${auth.currentUser!.email} kullanıcısı içecek verisi ekledi."));
   }
 }
-
-Future<void> doktorGorevVer() async {
+/* Future<void> doktorGorevVer() async {
   if (gorevler.text != "") {
     FirebaseFirestore.instance
         .collection("Hastalar")
@@ -62,4 +61,4 @@ Future<void> doktorGorevVer() async {
         .set({"gorev": gorevler.text, "Saat": tarihGun}).whenComplete(
             () => print("$tiklanilanHasta kullanıcısına görev verisi ekledi."));
   }
-}
+} */

@@ -39,10 +39,10 @@ class _EnAltBarDoktorState extends State<EnAltBarDoktor>
         ),
         body: TabBarView(
             controller: _tabController,
-            children: const [DoktorPanel(), Mesajlasma(), ProfilPage()]),
+            children: const [DoktorPanel(), ProfilPage()]),
       ),
     );
   }
 }
 
-enum _MyTabViews { Ana_Menu, Mesajlar, Profil_Sayfasi }
+enum _MyTabViews { Menu, Profil }

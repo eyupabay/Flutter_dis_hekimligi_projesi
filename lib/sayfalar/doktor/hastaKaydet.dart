@@ -47,7 +47,16 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
     }
 
     return Scaffold(
-      appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi),
+      appBar: ustBar(
+        context: context,
+        textYazisi: Stringler.uygulamaAdi,
+        basIkon: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const EnAltBarDoktor()));
+            },
+            icon: const Icon(Icons.keyboard_arrow_left_sharp)),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(

@@ -9,7 +9,7 @@ final icecek = TextEditingController();
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
-/* var doktorMaili = StreamBuilder(
+/* var doktorMailiOgren = StreamBuilder(
     stream: FirebaseFirestore.instance
         .collection('Hastalar')
         .doc(auth.currentUser?.email)
@@ -20,30 +20,13 @@ FirebaseAuth auth = FirebaseAuth.instance;
       }
       var userDocument = snapshot.data;
       return Text(userDocument!["doktorMaili"]);
-    }); */
-
-Query doktorGorevlerRef = FirebaseFirestore.instance
-    .collection("Hastalar")
-    .doc(tiklanilanHasta)
-    .collection("Gorevler")
-    .orderBy("Saat", descending: true);
+    });
+ */
 
 Query gorevlerRef = FirebaseFirestore.instance
     .collection("Hastalar")
     .doc(FirebaseAuth.instance.currentUser!.email)
     .collection("Gorevler")
-    .orderBy("Saat", descending: true);
-
-Query doktorYiyeceklerRef = FirebaseFirestore.instance
-    .collection("Hastalar")
-    .doc(tiklanilanHasta)
-    .collection("Yiyecekler")
-    .orderBy("Saat", descending: true);
-
-Query doktorIceceklerRef = FirebaseFirestore.instance
-    .collection("Hastalar")
-    .doc(tiklanilanHasta)
-    .collection("İçecekler")
     .orderBy("Saat", descending: true);
 
 Query yiyeceklerRef = FirebaseFirestore.instance
@@ -124,6 +107,8 @@ class HastaGorevleriOkuma extends StatefulWidget {
 }
 
 class _HastaGorevleriOkumaState extends State<HastaGorevleriOkuma> {
+  bool gorevYapildiMi = false;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -148,13 +133,29 @@ class _HastaGorevleriOkumaState extends State<HastaGorevleriOkuma> {
                       ),
                       subtitle: Text(listofDocsSnap[index].get("Saat")),
                       trailing: IconButton(
-                          onPressed: () async {
-                            /* 
+                        onPressed: () async {
+                          gorevYapildiMi =
+                              listofDocsSnap[index].get("yapildi") as bool;
+
+                          if (gorevYapildiMi == false) {
                             listofDocsSnap[index]
                                 .reference
-                                .set({"yapildi": true}); */
-                          },
-                          icon: const Icon(Icons.check_box_outline_blank)),
+                                .update({"yapildi": true});
+                          } else {
+                            listofDocsSnap[index]
+                                .reference
+                                .update({"yapildi": false});
+                          }
+                          setState(() {
+                            gorevYapildiMi = !gorevYapildiMi;
+                          });
+                        },
+                        icon: Icon(
+                            (listofDocsSnap[index].get("yapildi") as bool ==
+                                    false)
+                                ? Icons.check_box_outline_blank
+                                : Icons.check_box),
+                      ),
                     ),
                   );
                 }),
@@ -180,6 +181,18 @@ class DoktordanHastaBilgileriOkuma extends StatefulWidget {
 
 class _DoktordanHastaBilgileriOkumaState
     extends State<DoktordanHastaBilgileriOkuma> {
+  /* Query doktorYiyeceklerRef = FirebaseFirestore.instance
+      .collection("Hastalar")
+      .doc(tiklanilanHasta)
+      .collection("Yiyecekler")
+      .orderBy("Saat", descending: true);
+
+  Query doktorIceceklerRef = FirebaseFirestore.instance
+      .collection("Hastalar")
+      .doc(tiklanilanHasta)
+      .collection("İçecekler")
+      .orderBy("Saat", descending: true); */
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
