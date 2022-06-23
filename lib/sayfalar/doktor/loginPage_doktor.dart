@@ -3,19 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
-import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_hasta.dart';
-import '../stringler.dart';
-import 'sign_up_page.dart';
-import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
+import 'package:flutter_uygulama_deniyorum/models/ustPanel_signUp.dart';
+import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPageDoktor extends StatefulWidget {
+  const LoginPageDoktor({Key? key}) : super(key: key);
 
   @override
   LoginPageState createState() => LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPageDoktor> {
   //Giris fonksiyonları
   static Future<User?> emailsifreGiris(
       {required String email,
@@ -42,43 +40,6 @@ class LoginPageState extends State<LoginPage> {
   //textfield controller
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  Future getDataHasta() async {
-    var querySnapshot =
-        await FirebaseFirestore.instance.collection('Hastalar').get();
-    for (int i = 0; i < querySnapshot.docs.length; i++) {
-      if (emailController.text == querySnapshot.docs[i]["Email"]) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const EnAltBar()));
-        break;
-      } else {
-        return showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Hata'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: const <Widget>[
-                    Text('Bir hata ile karşılaştınız'),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('TAMAM'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    }
-  }
 
   Future getDataDoktor() async {
     var querySnapshot =
@@ -120,11 +81,10 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ustBar(context: context, textYazisi: Stringler.karsila),
+      /*  appBar: ustBar(context: context, textYazisi: Stringler.karsila), */
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          //Sütun döndürür..
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
@@ -155,7 +115,7 @@ class LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const SignUpPage()));
+                        builder: (context) => const SignUpTabBar()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -193,30 +153,6 @@ class LoginPageState extends State<LoginPage> {
                   },
                   child: Text(
                     "Doktor Girişi",
-                    style: Theme.of(context).textTheme.bodyText1,
-                    textScaleFactor: 1.2,
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Color(Theme.of(context).backgroundColor.blue),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      fixedSize: const Size(140, 60),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14))),
-                  onPressed: () async {
-                    User? user = await emailsifreGiris(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        context: context);
-                    print(user);
-                    if (user != null) {
-                      return getDataHasta();
-                    }
-                  },
-                  child: Text(
-                    "Hasta Girişi",
                     style: Theme.of(context).textTheme.bodyText1,
                     textScaleFactor: 1.2,
                   ),

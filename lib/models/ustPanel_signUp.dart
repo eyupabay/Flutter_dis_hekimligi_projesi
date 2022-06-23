@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/gorevler.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/ana_menu(hasta).dart';
-import "package:flutter_uygulama_deniyorum/sayfalar/profil_sayfasi.dart";
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/signUp_doktor.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/signUp_hasta.dart';
 
-class EnAltBar extends StatefulWidget {
-  const EnAltBar({Key? key}) : super(key: key);
+class SignUpTabBar extends StatefulWidget {
+  const SignUpTabBar({Key? key}) : super(key: key);
 
   @override
-  State<EnAltBar> createState() => _EnAltBarState();
+  State<SignUpTabBar> createState() => _LoginTabBarState();
 }
 
-class _EnAltBarState extends State<EnAltBar> with TickerProviderStateMixin {
+class _LoginTabBarState extends State<SignUpTabBar>
+    with TickerProviderStateMixin {
   late final TabController _tabController;
   @override
   void initState() {
@@ -24,10 +24,9 @@ class _EnAltBarState extends State<EnAltBar> with TickerProviderStateMixin {
     return DefaultTabController(
       length: _MyTabViews.values.length,
       child: Scaffold(
-        extendBody: true,
-        bottomNavigationBar: BottomAppBar(
-          notchMargin: 7,
-          child: TabBar(
+        appBar: AppBar(
+          backgroundColor: Colors.amber,
+          bottom: TabBar(
               splashBorderRadius: BorderRadius.circular(20),
               padding: EdgeInsets.zero,
               onTap: (int index) {},
@@ -37,10 +36,10 @@ class _EnAltBarState extends State<EnAltBar> with TickerProviderStateMixin {
         ),
         body: TabBarView(
             controller: _tabController,
-            children: const [HastaPaneli(), Gorevler(), ProfilPage()]),
+            children: const [SignUpHasta(), SignUpDoktor()]),
       ),
     );
   }
 }
 
-enum _MyTabViews { Menu, Gorevler, Profil }
+enum _MyTabViews { Hasta, Doktor }

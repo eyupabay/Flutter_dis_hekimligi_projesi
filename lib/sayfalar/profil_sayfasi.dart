@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/firebaseBilgileriOkuma.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);

@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_listesi.dart';
 import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
-import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hasta_veri_sayfasi.dart';
 import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';

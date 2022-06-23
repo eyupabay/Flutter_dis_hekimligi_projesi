@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_listesi.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
