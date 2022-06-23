@@ -50,6 +50,7 @@ class LoginPageState extends State<LoginPage> {
       if (emailController.text == querySnapshot.docs[i]["Email"]) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const EnAltBar()));
+        break;
       } else {
         return showDialog<void>(
           context: context,
@@ -86,6 +87,7 @@ class LoginPageState extends State<LoginPage> {
       if (emailController.text == querySnapshot.docs[i]["Email"]) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const EnAltBarDoktor()));
+        break;
       } else {
         return showDialog<void>(
           context: context,

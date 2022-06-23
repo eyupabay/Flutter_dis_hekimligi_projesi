@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
@@ -14,11 +15,14 @@ class _GorevlerState extends State<Gorevler> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ustBar(context: context, textYazisi: Stringler.gorevler),
-      body: Container(
-        width: 400,
-        height: 300,
-        color: Colors.green,
-        child: const Center(child: Text("Burada GÖREVLER yer alacak")),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            HastaGorevleriOkuma(
+                okunacakBilgi: gorevlerRef, okunacakBilgiKlasoru: "gorev"),
+          ],
+        ),
       ),
     );
   }

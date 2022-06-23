@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hasta_listesi.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
-import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/gorev_ver.dart';
+import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class HastaVeriSayfasi extends StatelessWidget {
@@ -35,6 +36,12 @@ class HastaVeriSayfasi extends StatelessWidget {
             okunacakBilgi: doktorIceceklerRef,
             okunacakBilgiKlasoru: "İçecek",
           ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const gorevVer()));
+              },
+              child: Text("Atanan görevler")),
         ]),
       ),
       /* bottomNavigationBar: enAltBar(context), */

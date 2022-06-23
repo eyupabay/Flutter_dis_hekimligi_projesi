@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
-import '../hasta_bilgileri/hasta_sayfa_bilgileri.dart';
-import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
+import '../../models/dekorasyonlar.dart';
+import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class HastaPaneli extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/gorevler.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/gorevler.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/mesajlasma.dart';
-import "package:flutter_uygulama_deniyorum/sayfalar/ana_menu(hasta).dart";
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/ana_menu(hasta).dart';
 import "package:flutter_uygulama_deniyorum/sayfalar/profil_sayfasi.dart";
 
 class EnAltBar extends StatefulWidget {
@@ -26,13 +26,6 @@ class _EnAltBarState extends State<EnAltBar> with TickerProviderStateMixin {
       length: _MyTabViews.values.length,
       child: Scaffold(
         extendBody: true,
-        /* floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.blue[400],
-            onPressed: () {
-              _tabController.animateTo(_MyTabViews.Ana_Menu.index);
-            },
-            child: const Icon(Icons.add)), */
         bottomNavigationBar: BottomAppBar(
           notchMargin: 7,
           child: TabBar(

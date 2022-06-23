@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_uygulama_deniyorum/sayfalar/hasta_veri_sayfasi.dart';
-import '../hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hasta_veri_sayfasi.dart';
+import 'firebaseBilgileriOkuma.dart';
 
 late String tiklanilanHasta;
 
-class HastaListesi extends StatelessWidget {
+class HastaListesi extends StatefulWidget {
   const HastaListesi({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<HastaListesi> createState() => _HastaListesiState();
+}
+
+class _HastaListesiState extends State<HastaListesi> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

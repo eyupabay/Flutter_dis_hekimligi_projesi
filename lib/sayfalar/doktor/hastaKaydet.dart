@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/yiyecek_ve_icecek_okuma.dart';
+import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
-import '../logging/log_islemleri.dart';
+import '../../logging/log_islemleri.dart';
 
 class KayitEtHasta extends StatefulWidget {
   const KayitEtHasta({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class KayitEtHasta extends StatefulWidget {
 }
 
 class _KayitEtHastaState extends State<KayitEtHasta> {
-  final girisYapanKullaniciMaili = auth.currentUser!.email.toString();
+  String girisYapanKullaniciMaili = auth.currentUser!.email.toString();
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
@@ -25,13 +25,21 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
           .doc(girisYapanKullaniciMaili)
           .collection("Hastalar")
           .doc(emailController.text)
-          .set({"Email": emailController.text, "role": "hasta"})
+          .set({
+            "Email": emailController.text,
+            "role": "hasta",
+            "doktorMaili": girisYapanKullaniciMaili
+          })
           .whenComplete(() => print(
               "${emailController.text} kullanıcısı doktorun koleksiyonuna eklendi."))
           .whenComplete(() => FirebaseFirestore.instance
-              .collection("Hastalar")
-              .doc(emailController.text)
-              .set({"Email": emailController.text, "role": "hasta"}))
+                  .collection("Hastalar")
+                  .doc(emailController.text)
+                  .set({
+                "Email": emailController.text,
+                "role": "hasta",
+                "doktorMaili": girisYapanKullaniciMaili
+              }))
           .whenComplete(() => print(
               "${emailController.text} kullanıcısı Hastalar koleksiyonuna eklendi."))
           .whenComplete(() => Navigator.of(context).pushReplacement(
