@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           tabBarTheme: const TabBarTheme(
-              labelColor: Colors.green,
-              unselectedLabelColor: Colors.grey,
+              labelColor: Color(0xff00796B),
+              unselectedLabelColor: Color(0xffb2dfdb),
               indicatorSize: TabBarIndicatorSize.tab,
               labelPadding: EdgeInsets.all(4.0)),
           bottomAppBarTheme:

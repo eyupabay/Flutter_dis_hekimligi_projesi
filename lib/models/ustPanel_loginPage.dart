@@ -25,13 +25,13 @@ class _LoginTabBarState extends State<LoginTabBar>
       length: _MyTabViews.values.length,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.amber,
+          backgroundColor: Colors.teal[300],
           bottom: TabBar(
               splashBorderRadius: BorderRadius.circular(20),
               padding: EdgeInsets.zero,
               onTap: (int index) {},
               controller: _tabController,
-              indicatorColor: Colors.green,
+              indicatorColor: Color(0xff00796B),
               tabs: _MyTabViews.values.map((e) => Tab(text: e.name)).toList()),
         ),
         body: TabBarView(

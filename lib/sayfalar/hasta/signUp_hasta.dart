@@ -54,10 +54,10 @@ class _SignUpHastaState extends State<SignUpHasta> {
             Container(
               width: 150,
               margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.png'),
+              child: Image.asset('assets/images/tooth.gif'),
             ),
             Text(
-              "Kayıt ol",
+              "Hasta Kaydı",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
@@ -98,7 +98,7 @@ class _SignUpHastaState extends State<SignUpHasta> {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Color(Theme.of(context).backgroundColor.blue),
+                    primary: Colors.teal[300],
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
                     fixedSize: const Size(140, 60),

@@ -66,7 +66,7 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
             Container(
               width: 150,
               margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.png'),
+              child: Image.asset('assets/images/tooth.gif'),
             ),
             Text(
               "Hasta kayıt et",
