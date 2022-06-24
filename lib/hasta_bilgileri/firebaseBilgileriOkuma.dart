@@ -68,15 +68,13 @@ class _HastaBilgileriOkumaState extends State<HastaBilgileriOkuma> {
                 itemCount: listofDocsSnap.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Theme.of(context).cardColor,
-                    elevation: 2.0,
                     child: ListTile(
                       title: Text(
-                        listofDocsSnap[index].get(widget.okunacakBilgiKlasoru),
-                        style:
-                            const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
-                      ),
-                      subtitle: Text(listofDocsSnap[index].get("Saat")),
+                          listofDocsSnap[index]
+                              .get(widget.okunacakBilgiKlasoru),
+                          style: Theme.of(context).textTheme.bodyText1),
+                      subtitle: Text(listofDocsSnap[index].get("Saat"),
+                          style: Theme.of(context).textTheme.bodyText2),
                       trailing: IconButton(
                           onPressed: () async {
                             await listofDocsSnap[index].reference.delete();
@@ -122,14 +120,15 @@ class _HastaGorevleriOkumaState extends State<HastaGorevleriOkuma> {
                 itemBuilder: (context, index) {
                   return Card(
                     color: Theme.of(context).cardColor,
-                    elevation: 2.0,
                     child: ListTile(
                       title: Text(
-                        listofDocsSnap[index].get(widget.okunacakBilgiKlasoru),
-                        style:
-                            const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
+                          listofDocsSnap[index]
+                              .get(widget.okunacakBilgiKlasoru),
+                          style: Theme.of(context).textTheme.bodyText1),
+                      subtitle: Text(
+                        listofDocsSnap[index].get("Saat"),
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
-                      subtitle: Text(listofDocsSnap[index].get("Saat")),
                       trailing: IconButton(
                         onPressed: () async {
                           gorevYapildiMi =
@@ -179,18 +178,6 @@ class DoktordanHastaBilgileriOkuma extends StatefulWidget {
 
 class _DoktordanHastaBilgileriOkumaState
     extends State<DoktordanHastaBilgileriOkuma> {
-  /* Query doktorYiyeceklerRef = FirebaseFirestore.instance
-      .collection("Hastalar")
-      .doc(tiklanilanHasta)
-      .collection("Yiyecekler")
-      .orderBy("Saat", descending: true);
-
-  Query doktorIceceklerRef = FirebaseFirestore.instance
-      .collection("Hastalar")
-      .doc(tiklanilanHasta)
-      .collection("İçecekler")
-      .orderBy("Saat", descending: true); */
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -206,14 +193,13 @@ class _DoktordanHastaBilgileriOkumaState
                 itemBuilder: (context, index) {
                   return Card(
                     color: Theme.of(context).cardColor,
-                    elevation: 2.0,
                     child: ListTile(
                       title: Text(
-                        listofDocsSnap[index].get(widget.okunacakBilgiKlasoru),
-                        style:
-                            const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
-                      ),
-                      subtitle: Text(listofDocsSnap[index].get("Saat")),
+                          listofDocsSnap[index]
+                              .get(widget.okunacakBilgiKlasoru),
+                          style: Theme.of(context).textTheme.bodyText1),
+                      subtitle: Text(listofDocsSnap[index].get("Saat"),
+                          style: Theme.of(context).textTheme.bodyText2),
                     ),
                   );
                 }),
@@ -253,14 +239,13 @@ class _DoktordanGorevleriOkumaState extends State<DoktordanGorevleriOkuma> {
                 itemBuilder: (context, index) {
                   return Card(
                     color: Theme.of(context).cardColor,
-                    elevation: 2.0,
                     child: ListTile(
                       title: Text(
-                        listofDocsSnap[index].get(widget.okunacakBilgiKlasoru),
-                        style:
-                            const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
-                      ),
-                      subtitle: Text(listofDocsSnap[index].get("Saat")),
+                          listofDocsSnap[index]
+                              .get(widget.okunacakBilgiKlasoru),
+                          style: Theme.of(context).textTheme.bodyText1),
+                      subtitle: Text(listofDocsSnap[index].get("Saat"),
+                          style: Theme.of(context).textTheme.bodyText2),
                       trailing: IconButton(
                           onPressed: () async {
                             await listofDocsSnap[index].reference.delete();

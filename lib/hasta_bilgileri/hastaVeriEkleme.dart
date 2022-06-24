@@ -30,7 +30,7 @@ Future<void> hastaVeriEkle() async {
         .doc()
         .set({
       "KullaniciUID": auth.currentUser!.uid,
-      "Yemek": yemekler.text,
+      "Yemek": yemekler.text.toUpperCase(),
       "Saat": gunVeSaat
     }).whenComplete(() => print(
             "${auth.currentUser!.email} kullanıcısı yiyecek verisi ekledi."));
@@ -44,7 +44,7 @@ Future<void> hastaVeriEkle() async {
         .doc()
         .set({
       "KullaniciUID": auth.currentUser!.uid,
-      "İçecek": icecekler.text,
+      "İçecek": icecekler.text.toUpperCase(),
       "Saat": gunVeSaat
     }).whenComplete(() => print(
             "${auth.currentUser!.email} kullanıcısı içecek verisi ekledi."));

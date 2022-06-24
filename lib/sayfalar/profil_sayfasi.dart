@@ -33,9 +33,11 @@ class _ProfilPageState extends State<ProfilPage> {
                     const CikisYap();
                   },
                   style: ElevatedButton.styleFrom(
+                    primary: Colors.teal[400],
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 10),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                    primary: Colors.blueAccent,
+                        borderRadius: BorderRadius.circular(16)),
                   ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
                   child: const Text(
                     Stringler.cikisYap,

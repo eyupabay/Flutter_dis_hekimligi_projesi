@@ -119,7 +119,6 @@ class LoginPageState extends State<LoginPageDoktor> {
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    fixedSize: const Size(80, 60),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
@@ -138,7 +137,6 @@ class LoginPageState extends State<LoginPageDoktor> {
                       primary: Colors.teal[300],
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
-                      fixedSize: const Size(140, 60),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14))),
                   onPressed: () async {
@@ -151,11 +149,8 @@ class LoginPageState extends State<LoginPageDoktor> {
                       return getDataDoktor();
                     }
                   },
-                  child: Text(
-                    "Doktor Girişi",
-                    style: Theme.of(context).textTheme.bodyText1,
-                    textScaleFactor: 1.2,
-                  ),
+                  child: Text("Giriş yap",
+                      style: Theme.of(context).textTheme.headline2),
                 ),
               ],
             ),

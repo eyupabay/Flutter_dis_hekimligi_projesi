@@ -96,16 +96,12 @@ class _SignUpDoktorState extends State<SignUpDoktor> {
                     primary: Colors.teal[300],
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
-                    fixedSize: const Size(140, 60),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
                   onPressed: kayitolDoktor,
-                  child: Text(
-                    "Doktor kaydı",
-                    style: Theme.of(context).textTheme.bodyText1,
-                    textScaleFactor: 1.2,
-                  ),
+                  child: Text("Kayıt ol",
+                      style: Theme.of(context).textTheme.headline2),
                 ),
               ],
             ),

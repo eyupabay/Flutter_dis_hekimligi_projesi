@@ -120,7 +120,6 @@ class LoginPageState extends State<LoginPageHasta> {
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    fixedSize: const Size(80, 60),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
@@ -139,7 +138,6 @@ class LoginPageState extends State<LoginPageHasta> {
                       primary: Colors.teal[300],
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
-                      fixedSize: const Size(140, 60),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14))),
                   onPressed: () async {
@@ -153,9 +151,8 @@ class LoginPageState extends State<LoginPageHasta> {
                     }
                   },
                   child: Text(
-                    "Hasta Girişi",
-                    style: Theme.of(context).textTheme.bodyText1,
-                    textScaleFactor: 1.2,
+                    "Giriş yap",
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ),
               ],

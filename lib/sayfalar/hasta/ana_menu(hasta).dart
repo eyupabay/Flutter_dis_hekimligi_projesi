@@ -23,19 +23,20 @@ class _HastaPaneliState extends State<HastaPaneli> {
           hastaVeriAvcisi(
               eklenecekVeri: yemekler, veriDekorasyonu: yiyecekDekorasyonu()),
           hastaVeriAvcisi(
-              eklenecekVeri: icecekler, veriDekorasyonu: yiyecekDekorasyonu()),
+              eklenecekVeri: icecekler, veriDekorasyonu: icecekDekorasyonu()),
           ElevatedButton(
             onPressed: () async {
               yeIcVeriEkle();
             },
             style: ElevatedButton.styleFrom(
+              primary: Colors.teal[400],
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14)),
-              primary: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(16)),
             ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-            child: const Text(
+            child: Text(
               "Veri ekle",
-              style: TextStyle(color: Colors.white),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
           HastaBilgileriOkuma(

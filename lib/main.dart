@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_loginPage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,12 +24,26 @@ class MyApp extends StatelessWidget {
               const BottomAppBarTheme(shape: CircularNotchedRectangle()),
           backgroundColor: Colors.blue[400],
           textTheme: TextTheme(
-              headline4: const TextStyle(color: Colors.black),
-              bodyText1: const TextStyle(color: Colors.black),
-              labelMedium: TextStyle(color: Colors.blue[700])),
+              headline2:
+                  GoogleFonts.nunito(fontSize: 20.0, color: Colors.black),
+              headline4: GoogleFonts.nunito(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+              bodyText1: GoogleFonts.nunito(
+                  fontSize: 18.0, fontWeight: FontWeight.w400),
+              bodyText2: GoogleFonts.nunito(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w200), //Veri ekleme buton teması
+              labelMedium: GoogleFonts.nunito(
+                  fontSize: 14.0, fontWeight: FontWeight.w600)),
           scaffoldBackgroundColor: Colors.white,
-          primarySwatch: Colors.red,
-          cardColor: Colors.blue[200],
+          primarySwatch: Colors.teal,
+          cardColor: Color(0xff53b2d4),
+          cardTheme: CardTheme(
+              elevation: 2.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14.0))),
           secondaryHeaderColor: Colors.green[300]),
       home: const HomePage(),
     );

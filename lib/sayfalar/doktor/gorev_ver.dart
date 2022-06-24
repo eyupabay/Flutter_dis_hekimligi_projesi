@@ -52,7 +52,10 @@ class _gorevVerState extends State<gorevVer> {
                       .doc(widget.tiklanilanHasta)
                       .collection("Gorevler")
                       .doc()
-                      .set({"gorev": gorevler.text, "Saat": tarihGun})
+                      .set({
+                        "gorev": gorevler.text.toUpperCase(),
+                        "Saat": tarihGun
+                      })
                       .whenComplete(() => print(
                           "${widget.tiklanilanHasta} kullanıcısına görev verisi ekledi."))
                       .then((value) => {gorevler.clear()});
