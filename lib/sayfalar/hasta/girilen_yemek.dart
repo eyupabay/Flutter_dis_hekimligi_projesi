@@ -28,6 +28,7 @@ class _GirilenYemekSayfasiState extends State<GirilenYemekSayfasi> {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
+          /* CupertinoButton.filled(child: child, onPressed: (){}), */
           HastaBilgileriOkuma(
               okunacakBilgi: yiyeceklerRef, okunacakBilgiKlasoru: "Yemek"),
         ]),

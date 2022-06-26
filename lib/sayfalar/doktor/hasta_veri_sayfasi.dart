@@ -15,6 +15,43 @@ class HastaVeriSayfasi extends StatefulWidget {
 }
 
 class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
+  DateTime? _chosenDateTime;
+
+  // Show the modal that contains the CupertinoDatePicker
+  void _showDatePicker(context) {
+    // showCupertinoModalPopup is a built-in function of the cupertino library
+    showCupertinoModalPopup(
+        context: context,
+        builder: (_) => Container(
+              height: 500,
+              color: const Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                        dateOrder: DatePickerDateOrder.dmy,
+                        use24hFormat: true,
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: DateTime.now(),
+                        maximumYear: DateTime.now().year,
+                        minimumYear: DateTime.now().year - 1,
+                        maximumDate: DateTime.now(),
+                        onDateTimeChanged: (val) {
+                          setState(() {
+                            _chosenDateTime = val;
+                          });
+                        }),
+                  ),
+                  CupertinoButton(
+                    child: const Text('SEÇ'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              ),
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +69,14 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
         padding: const EdgeInsets.all(12),
         child: Column(children: [
           Text(widget.tiklanilanHasta),
+          CupertinoButton(
+            padding: EdgeInsetsDirectional.zero,
+            child: const Text('Tarihlere filtrele'),
+            onPressed: () => _showDatePicker(context),
+          ),
+          Text(_chosenDateTime != null
+              ? "${_chosenDateTime?.day}-${_chosenDateTime?.month}-${_chosenDateTime?.year}"
+              : 'Herhangi bir tarih seçilmedi.'),
           DoktordanHastaBilgileriOkuma(
             okunacakBilgi: FirebaseFirestore.instance
                 .collection("Hastalar")
