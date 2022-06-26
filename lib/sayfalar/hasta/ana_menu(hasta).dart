@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/girilen_icecekler.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/girilen_yemek.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import '../../models/dekorasyonlar.dart';
-import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
+import '../../logging/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class HastaPaneli extends StatefulWidget {
@@ -24,35 +27,45 @@ class _HastaPaneliState extends State<HastaPaneli> {
               eklenecekVeri: yemekler, veriDekorasyonu: yiyecekDekorasyonu()),
           hastaVeriAvcisi(
               eklenecekVeri: icecekler, veriDekorasyonu: icecekDekorasyonu()),
-          ElevatedButton(
+          CupertinoButton.filled(
             onPressed: () async {
               yeIcVeriEkle();
             },
+            /* 
             style: ElevatedButton.styleFrom(
-              primary: Colors.teal[400],
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-            ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            ), */
             child: Text(
               "Veri ekle",
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
-          HastaBilgileriOkuma(
-            okunacakBilgi: yiyeceklerRef,
-            okunacakBilgiKlasoru: "Yemek",
-          ),
           const Divider(
-            height: 20,
+            height: 150,
           ),
-          HastaBilgileriOkuma(
-            okunacakBilgi: iceceklerRef,
-            okunacakBilgiKlasoru: "İçecek",
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(
+                iconSize: 60.0,
+                icon: const Icon(Icons.food_bank),
+                onPressed: () async {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const GirilenYemekSayfasi()));
+                },
+              ),
+              IconButton(
+                iconSize: 60.0,
+                icon: const Icon(Icons.local_drink),
+                onPressed: () async {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const GirilenIcecekSayfasi()));
+                },
+              ),
+            ],
           ),
         ]),
       ),
-      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 }

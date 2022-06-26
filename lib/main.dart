@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_loginPage.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/loginPage_doktor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -15,11 +17,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
+            primaryColor: Colors.teal[300],
+          ),
+          iconTheme: IconThemeData(color: Colors.teal[400]),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            primary: Colors.teal[300],
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          )),
+          inputDecorationTheme: InputDecorationTheme(
+              hintStyle:
+                  GoogleFonts.nunito(color: Colors.grey[700], fontSize: 15.0),
+              border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16)))),
           tabBarTheme: const TabBarTheme(
-              labelColor: Color(0xff00796B),
-              unselectedLabelColor: Color(0xffb2dfdb),
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelPadding: EdgeInsets.all(4.0)),
+            labelColor: Color.fromARGB(255, 0, 94, 83),
+            unselectedLabelColor: Color.fromARGB(103, 0, 121, 107),
+            indicatorSize: TabBarIndicatorSize.tab,
+            labelPadding: EdgeInsets.all(4.0),
+          ),
+          indicatorColor: Colors.green,
           bottomAppBarTheme:
               const BottomAppBarTheme(shape: CircularNotchedRectangle()),
           backgroundColor: Colors.blue[400],

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hastaKaydet.dart';
@@ -21,10 +22,9 @@ TextField textGirdileri(
 
 InputDecoration girisSifreDekorasyonu() {
   return const InputDecoration(
-    border: OutlineInputBorder(),
     hintText: "Şifre",
     prefixIcon: Icon(
-      Icons.lock,
+      CupertinoIcons.lock,
       color: Colors.black,
     ),
   );
@@ -32,10 +32,9 @@ InputDecoration girisSifreDekorasyonu() {
 
 InputDecoration girisMailDekorasyonu() {
   return const InputDecoration(
-    border: OutlineInputBorder(),
     hintText: "Email adresi",
     prefixIcon: Icon(
-      Icons.mail,
+      CupertinoIcons.mail,
       color: Colors.black,
     ),
   );
@@ -71,7 +70,7 @@ class HastaEklemeButonu extends StatelessWidget {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const KayitEtHasta()));
       },
-      icon: const Icon(Icons.add),
+      icon: const Icon(CupertinoIcons.person_add),
     );
   }
 }

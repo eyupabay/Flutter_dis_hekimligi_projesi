@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "60362099515",
-    "project_id": "flutter-bitirme-projesi",
-    "storage_bucket": "flutter-bitirme-projesi.appspot.com"
+    "project_number": "782303187404",
+    "project_id": "dis-hekimligi-projesi",
+    "storage_bucket": "dis-hekimligi-projesi.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:60362099515:android:bc88407fba1488a16d851e",
+        "mobilesdk_app_id": "1:782303187404:android:44ddd9ae9a924ba7350d69",
         "android_client_info": {
           "package_name": "com.example.flutter_uygulama_deniyorum"
         }
       },
       "oauth_client": [
         {
-          "client_id": "60362099515-43rkh37dc44m6scq6bvkgunkkom4f6r2.apps.googleusercontent.com",
+          "client_id": "782303187404-6u2kup9o6qfiefctrusolfjt8gt0eoqd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDJDkuFYDVtNubUCqpSP996hsZAu5wEgLo"
+          "current_key": "AIzaSyDZlxjVou9ewgXs1RYY29Xv5P2Fr-RgfU8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "60362099515-43rkh37dc44m6scq6bvkgunkkom4f6r2.apps.googleusercontent.com",
+              "client_id": "782303187404-6u2kup9o6qfiefctrusolfjt8gt0eoqd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

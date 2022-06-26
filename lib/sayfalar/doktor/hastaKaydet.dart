@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/firebaseBilgileriOkuma.dart';
-import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
+import 'package:flutter_uygulama_deniyorum/logging/firebaseBilgileriOkuma.dart';
+import 'package:flutter_uygulama_deniyorum/models/altNavigationDoktor.dart';
+import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
-import '../../logging/log_islemleri.dart';
+import '../../models/log_islemleri.dart';
 
 class KayitEtHasta extends StatefulWidget {
   const KayitEtHasta({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
       FirebaseFirestore.instance
           .collection("Doktorlar")
           .doc(girisYapanKullaniciMaili)
-          .collection("Hastalar")
+          .collection("Hastalarim")
           .doc(emailController.text)
           .set({
             "Email": emailController.text,
@@ -43,7 +45,7 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
           .whenComplete(() => print(
               "${emailController.text} kullanıcısı Hastalar koleksiyonuna eklendi."))
           .whenComplete(() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const EnAltBarDoktor())));
+              MaterialPageRoute(builder: (context) => NavigationBarDoktor())));
     }
 
     return Scaffold(
@@ -53,21 +55,16 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
         basIkon: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const EnAltBarDoktor()));
+                  builder: (context) => NavigationBarDoktor()));
             },
-            icon: const Icon(Icons.keyboard_arrow_left_sharp)),
+            icon: const Icon(CupertinoIcons.left_chevron)),
       ),
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          //Sütun döndürür..
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              width: 150,
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.gif'),
-            ),
+            const AnaEkrangif(),
             Text(
               "Hasta kayıt et",
               textAlign: TextAlign.center,
@@ -79,15 +76,12 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
                 ilerleme: TextInputAction.next,
                 isAutofocus: true,
                 isObscureText: false),
-            ElevatedButton(
+            CupertinoButton.filled(
+              /* 
               style: ElevatedButton.styleFrom(
-                primary: Color(Theme.of(context).backgroundColor.blue),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                fixedSize: const Size(170, 60),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14)),
-              ),
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)) */
               onPressed: hastaEntegreEt,
               child: Text(
                 Stringler.kaydet,

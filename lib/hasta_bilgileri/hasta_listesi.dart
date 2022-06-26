@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hasta_veri_sayfasi.dart';
-import 'firebaseBilgileriOkuma.dart';
+import '../logging/firebaseBilgileriOkuma.dart';
 
 class HastaListesi extends StatefulWidget {
   @override
@@ -25,14 +26,10 @@ class _HastaListesiState extends State<HastaListesi> {
                 itemCount: listofDocsSnap.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Colors.indigo.shade100,
-                    elevation: 2.0,
                     child: ListTile(
                       title: Text(
-                        (listofDocsSnap[index].data() as Map)["Email"],
-                        style:
-                            const TextStyle(fontSize: 14.0, letterSpacing: 1.2),
-                      ),
+                          (listofDocsSnap[index].data() as Map)["Email"],
+                          style: Theme.of(context).textTheme.bodyText1),
                       trailing: IconButton(
                           onPressed: () async {
                             tiklanilanHasta =
@@ -50,7 +47,7 @@ class _HastaListesiState extends State<HastaListesi> {
                                     builder: (context) => HastaVeriSayfasi(
                                         tiklanilanHasta: tiklanilanHasta)));
                           },
-                          icon: const Icon(Icons.navigate_next)),
+                          icon: const Icon(CupertinoIcons.forward)),
                     ),
                   );
                 }),
@@ -62,4 +59,4 @@ class _HastaListesiState extends State<HastaListesi> {
 Query hastalarRef = FirebaseFirestore.instance
     .collection("Doktorlar")
     .doc(auth.currentUser!.email)
-    .collection("Hastalar");
+    .collection("Hastalarim");

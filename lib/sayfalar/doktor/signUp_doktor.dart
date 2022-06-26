@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
+import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_loginPage.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
@@ -15,10 +17,8 @@ class SignUpDoktor extends StatefulWidget {
 class _SignUpDoktorState extends State<SignUpDoktor> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailControllerDoktor =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    TextEditingController passwordControllerDoktor =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+    TextEditingController emailControllerDoktor = TextEditingController();
+    TextEditingController passwordControllerDoktor = TextEditingController();
 
     Future<void> kayitolDoktor() async {
       await FirebaseAuth.instance
@@ -30,7 +30,6 @@ class _SignUpDoktorState extends State<SignUpDoktor> {
             .collection("Doktorlar")
             .doc(emailControllerDoktor.text)
             .set({
-          "role": "doktor",
           "Email": emailControllerDoktor.text
         }).whenComplete(() => print(
                 "Kullanıcı oluşturulup veritabanında Doktorlar koleksiyonuna hasta profili ekledi."));
@@ -39,21 +38,13 @@ class _SignUpDoktorState extends State<SignUpDoktor> {
     }
 
     return Scaffold(
-      /* appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi), */
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          //Sütun döndürür..
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              width: 150,
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.gif'),
-            ),
+            const AnaEkrangif(),
             Text(
               "Doktor Kaydı",
-              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
             textGirdileri(
@@ -71,16 +62,15 @@ class _SignUpDoktorState extends State<SignUpDoktor> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                CupertinoButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const LoginTabBar()));
                   },
+                  /* 
                   style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      fixedSize: const Size(100, 20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14))),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                  ), */
                   child: Text(
                     Stringler.kullaniciGiris,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -89,16 +79,11 @@ class _SignUpDoktorState extends State<SignUpDoktor> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.teal[300],
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                  ),
+                CupertinoButton.filled(
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   onPressed: kayitolDoktor,
                   child: Text("Kayıt ol",
                       style: Theme.of(context).textTheme.headline2),

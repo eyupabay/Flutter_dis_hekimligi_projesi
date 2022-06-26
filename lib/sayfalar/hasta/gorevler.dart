@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/firebaseBilgileriOkuma.dart';
+import 'package:flutter_uygulama_deniyorum/logging/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 

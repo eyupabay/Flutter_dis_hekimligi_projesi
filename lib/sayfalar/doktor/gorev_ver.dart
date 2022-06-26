@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/hasta_bilgileri/hastaVeriEkleme.dart';
 import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hasta_veri_sayfasi.dart';
-import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
+import '../../logging/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class gorevVer extends StatefulWidget {
@@ -21,7 +22,7 @@ class _gorevVerState extends State<gorevVer> {
     return Scaffold(
       appBar: ustBar(
         context: context,
-        textYazisi: "Gorev bilgileri",
+        textYazisi: "Görev bilgileri",
         basIkon: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -29,12 +30,11 @@ class _gorevVerState extends State<gorevVer> {
                         tiklanilanHasta: widget.tiklanilanHasta,
                       )));
             },
-            icon: const Icon(Icons.keyboard_arrow_left_sharp)),
+            icon: const Icon(CupertinoIcons.left_chevron)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
-          /* Text(tiklanilanHasta), */
           doktorGorevAvcisi(
               eklenecekVeri: gorevler, veriDekorasyonu: gorevDekorasyonu()),
           DoktordanGorevleriOkuma(
@@ -44,7 +44,12 @@ class _gorevVerState extends State<gorevVer> {
                   .collection("Gorevler")
                   .orderBy("Saat", descending: true),
               okunacakBilgiKlasoru: "gorev"),
-          ElevatedButton(
+          CupertinoButton.filled(
+              /* 
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)), */
               onPressed: () async {
                 if (gorevler.text != "") {
                   FirebaseFirestore.instance
@@ -54,18 +59,20 @@ class _gorevVerState extends State<gorevVer> {
                       .doc()
                       .set({
                         "gorev": gorevler.text.toUpperCase(),
-                        "Saat": tarihGun
+                        "Saat": tarihGun,
+                        "yapildi": false
                       })
                       .whenComplete(() => print(
                           "${widget.tiklanilanHasta} kullanıcısına görev verisi ekledi."))
                       .then((value) => {gorevler.clear()});
                 }
-                /* gorevYaz(widget.tiklanilanHasta); */
               },
-              child: Text("Gorev ver")),
+              child: Text(
+                "Görev ver",
+                style: Theme.of(context).textTheme.bodyText1,
+              )),
         ]),
       ),
-      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 }

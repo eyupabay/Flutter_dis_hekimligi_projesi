@@ -26,6 +26,7 @@ class _LoginTabBarState extends State<LoginTabBar>
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.teal[300],
+          toolbarHeight: 10,
           bottom: TabBar(
               splashBorderRadius: BorderRadius.circular(20),
               padding: EdgeInsets.zero,

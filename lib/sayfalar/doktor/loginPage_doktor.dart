@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
+import 'package:flutter_uygulama_deniyorum/models/altNavigationDoktor.dart';
+import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
+import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_signUp.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
@@ -14,22 +16,17 @@ class LoginPageDoktor extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPageDoktor> {
-  //Giris fonksiyonları
   static Future<User?> emailsifreGiris(
       {required String email,
       required String password,
       required BuildContext context}) async {
-    FirebaseAuth auth =
-        FirebaseAuth.instance; //Firebase Authentication çalıştırıyoruz.
+    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          //userCredential sınıfı içerisinde kayıtlı email aranıyor...
-          email: email,
-          password: password);
+          email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      //userCredential içerisinde kayıtlı email yoksa ekrana bulunamadı yazdırıyor...
       if (e.code == "user-not-found") {
         print("Kullanici bulunamadi.");
       }
@@ -37,7 +34,6 @@ class LoginPageState extends State<LoginPageDoktor> {
     return user;
   }
 
-  //textfield controller
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -45,15 +41,13 @@ class LoginPageState extends State<LoginPageDoktor> {
     var querySnapshot =
         await FirebaseFirestore.instance.collection('Doktorlar').get();
     for (int i = 0; i < querySnapshot.docs.length; i++) {
-      if (emailController.text == querySnapshot.docs[i]["Email"]) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const EnAltBarDoktor()));
-        break;
-      } else {
+      if (emailController.text.toString().toLowerCase() !=
+          querySnapshot.docs[i]["Email"]) {
         return showDialog<void>(
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
+            print("Doktor bulunamadı.");
             return AlertDialog(
               title: const Text('Hata'),
               content: SingleChildScrollView(
@@ -74,6 +68,10 @@ class LoginPageState extends State<LoginPageDoktor> {
             );
           },
         );
+      } else {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => NavigationBarDoktor()));
+        print("Doktor bulundu");
       }
     }
   }
@@ -81,20 +79,13 @@ class LoginPageState extends State<LoginPageDoktor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*  appBar: ustBar(context: context, textYazisi: Stringler.karsila), */
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              width: 150,
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.gif'),
-            ),
+            const AnaEkrangif(),
             Text(
               "Doktor Girişi",
-              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
             textGirdileri(
@@ -112,16 +103,13 @@ class LoginPageState extends State<LoginPageDoktor> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                CupertinoButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const SignUpTabBar()));
                   },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                  ),
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   child: Text(
                     Stringler.kayitOl,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -130,15 +118,11 @@ class LoginPageState extends State<LoginPageDoktor> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[300],
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14))),
+                CupertinoButton.filled(
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   onPressed: () async {
                     User? user = await emailsifreGiris(
                         email: emailController.text,
@@ -147,6 +131,8 @@ class LoginPageState extends State<LoginPageDoktor> {
                     print(user);
                     if (user != null) {
                       return getDataDoktor();
+                      /* Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const EnAltBarDoktor())); */
                     }
                   },
                   child: Text("Giriş yap",

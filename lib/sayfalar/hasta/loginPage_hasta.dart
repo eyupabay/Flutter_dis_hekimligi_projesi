@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
-import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_hasta.dart';
+import 'package:flutter_uygulama_deniyorum/models/AltNavigationHasta.dart';
+import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
+import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_signUp.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
@@ -37,7 +39,6 @@ class LoginPageState extends State<LoginPageHasta> {
     return user;
   }
 
-  //textfield controller
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -45,11 +46,9 @@ class LoginPageState extends State<LoginPageHasta> {
     var querySnapshot =
         await FirebaseFirestore.instance.collection('Hastalar').get();
     for (int i = 0; i < querySnapshot.docs.length; i++) {
-      if (emailController.text == querySnapshot.docs[i]["Email"]) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const EnAltBar()));
-        break;
-      } else {
+      if (emailController.text.toString().toLowerCase() !=
+          querySnapshot.docs[i]["Email"]) {
+        print("Hasta bulunamadı.");
         return showDialog<void>(
           context: context,
           barrierDismissible: false,
@@ -74,6 +73,10 @@ class LoginPageState extends State<LoginPageHasta> {
             );
           },
         );
+      } else {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => NavigationBarHasta()));
+        print("Hasta bulundu.");
       }
     }
   }
@@ -81,21 +84,13 @@ class LoginPageState extends State<LoginPageHasta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*  appBar: ustBar(context: context, textYazisi: Stringler.karsila), */
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          //Sütun döndürür..
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              width: 150,
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.gif'),
-            ),
+            const AnaEkrangif(),
             Text(
               "Hasta Girişi",
-              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
             textGirdileri(
@@ -113,16 +108,13 @@ class LoginPageState extends State<LoginPageHasta> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                CupertinoButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const SignUpTabBar()));
                   },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                  ),
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   child: Text(
                     Stringler.kayitOl,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -131,15 +123,11 @@ class LoginPageState extends State<LoginPageHasta> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[300],
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14))),
+                CupertinoButton.filled(
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   onPressed: () async {
                     User? user = await emailsifreGiris(
                         email: emailController.text,

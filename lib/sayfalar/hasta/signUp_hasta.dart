@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
+import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_loginPage.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
@@ -15,12 +17,10 @@ class SignUpHasta extends StatefulWidget {
 class _SignUpHastaState extends State<SignUpHasta> {
   @override
   Widget build(BuildContext context) {
-    //textfield controller
     TextEditingController emailControllerHasta = TextEditingController();
     TextEditingController passwordControllerHasta = TextEditingController();
 
     Future<void> kayitolHasta() async {
-      //HASTALAR İÇİN
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailControllerHasta.text,
@@ -29,36 +29,23 @@ class _SignUpHastaState extends State<SignUpHasta> {
         FirebaseFirestore.instance
             .collection("Hastalar")
             .doc(emailControllerHasta.text)
-            .set({
-          "role": "hasta",
-          "Email": emailControllerHasta.text
-        }).whenComplete(() => print(
+            .set({"Email": emailControllerHasta.text}).whenComplete(() => print(
                 "Kullanıcı oluşturulup veritabanında Hastalar koleksiyonuna hasta profili ekledi."));
       }).whenComplete(() => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const LoginTabBar())));
     }
 
-    TextEditingController emailControllerDoktor =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
-    TextEditingController passwordControllerDoktor =
-        TextEditingController(); //Yazılan Textfield yerine eşitlenecek değişken adı
+    TextEditingController emailControllerDoktor = TextEditingController();
+    TextEditingController passwordControllerDoktor = TextEditingController();
 
     return Scaffold(
-      /* appBar: ustBar(context: context, textYazisi: Stringler.uygulamaAdi), */
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          //Sütun döndürür..
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              width: 150,
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Image.asset('assets/images/tooth.gif'),
-            ),
+            const AnaEkrangif(),
             Text(
               "Hasta Kaydı",
-              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline4,
             ),
             textGirdileri(
@@ -76,16 +63,13 @@ class _SignUpHastaState extends State<SignUpHasta> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                CupertinoButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const LoginTabBar()));
                   },
-                  style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      fixedSize: const Size(100, 20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14))),
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   child: Text(
                     Stringler.kullaniciGiris,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -94,16 +78,11 @@ class _SignUpHastaState extends State<SignUpHasta> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.teal[300],
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                  ),
+                CupertinoButton.filled(
+                  /* 
+                  style: ElevatedButton.styleFrom(), */
                   onPressed: kayitolHasta,
                   child: Text("Kayıt ol",
                       style: Theme.of(context).textTheme.headline2),

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -79,7 +80,7 @@ class _HastaBilgileriOkumaState extends State<HastaBilgileriOkuma> {
                           onPressed: () async {
                             await listofDocsSnap[index].reference.delete();
                           },
-                          icon: const Icon(Icons.delete)),
+                          icon: const Icon(CupertinoIcons.trash_fill)),
                     ),
                   );
                 }),
@@ -150,8 +151,8 @@ class _HastaGorevleriOkumaState extends State<HastaGorevleriOkuma> {
                         icon: Icon(
                             (listofDocsSnap[index].get("yapildi") as bool ==
                                     false)
-                                ? Icons.check_box_outline_blank
-                                : Icons.check_box),
+                                ? CupertinoIcons.app
+                                : CupertinoIcons.checkmark_square),
                       ),
                     ),
                   );
@@ -192,7 +193,6 @@ class _DoktordanHastaBilgileriOkumaState
                 itemCount: listofDocsSnap.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Theme.of(context).cardColor,
                     child: ListTile(
                       title: Text(
                           listofDocsSnap[index]
@@ -238,7 +238,6 @@ class _DoktordanGorevleriOkumaState extends State<DoktordanGorevleriOkuma> {
                 itemCount: listofDocsSnap.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Theme.of(context).cardColor,
                     child: ListTile(
                       title: Text(
                           listofDocsSnap[index]
@@ -250,7 +249,7 @@ class _DoktordanGorevleriOkumaState extends State<DoktordanGorevleriOkuma> {
                           onPressed: () async {
                             await listofDocsSnap[index].reference.delete();
                           },
-                          icon: const Icon(Icons.delete)),
+                          icon: const Icon(CupertinoIcons.trash)),
                     ),
                   );
                 }),

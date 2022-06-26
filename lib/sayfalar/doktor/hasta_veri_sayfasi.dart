@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/models/arayuzAltPanel_doktor.dart';
+import 'package:flutter_uygulama_deniyorum/models/altNavigationDoktor.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/gorev_ver.dart';
-import '../../hasta_bilgileri/firebaseBilgileriOkuma.dart';
+import '../../logging/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
 class HastaVeriSayfasi extends StatefulWidget {
   var tiklanilanHasta;
-  HastaVeriSayfasi({this.tiklanilanHasta});
+  HastaVeriSayfasi({Key? key, this.tiklanilanHasta}) : super(key: key);
 
   @override
   State<HastaVeriSayfasi> createState() => _HastaVeriSayfasiState();
@@ -23,9 +24,9 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
         basIkon: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const EnAltBarDoktor()));
+                  builder: (context) => NavigationBarDoktor()));
             },
-            icon: const Icon(Icons.keyboard_arrow_left_sharp)),
+            icon: const Icon(CupertinoIcons.left_chevron)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -50,17 +51,27 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
                 .orderBy("Saat", descending: true),
             okunacakBilgiKlasoru: "İçecek",
           ),
-          ElevatedButton(
+          CupertinoButton.filled(
+              /* 
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)) */
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
                     builder: (context) => gorevVer(
-                          tiklanilanHasta: widget.tiklanilanHasta,
-                        )));
+                      tiklanilanHasta: widget.tiklanilanHasta,
+                    ),
+                  ),
+                );
               },
-              child: Text("Atanan görevler")),
+              child: Text(
+                "Atanan görevler",
+                style: Theme.of(context).textTheme.bodyText1,
+              )),
         ]),
       ),
-      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 }

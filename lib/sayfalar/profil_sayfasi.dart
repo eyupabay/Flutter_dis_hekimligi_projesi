@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uygulama_deniyorum/logging/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 
@@ -25,29 +25,11 @@ class _ProfilPageState extends State<ProfilPage> {
           children: [
             Text(
               "Email:${FirebaseAuth.instance.currentUser!.email.toString()}",
-              style: const TextStyle(fontSize: 20),
-            ),
-            Center(
-              child: ElevatedButton(
-                  onPressed: () {
-                    const CikisYap();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.teal[400],
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                  ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-                  child: const Text(
-                    Stringler.cikisYap,
-                    textAlign: TextAlign.center,
-                  )),
+              style: Theme.of(context).textTheme.headline2,
             ),
           ],
         ),
       ),
-      /* bottomNavigationBar: enAltBar(context), */
     );
   }
 }
