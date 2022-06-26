@@ -9,17 +9,15 @@ final yemekler = TextEditingController();
 final icecekler = TextEditingController();
 final gorevler = TextEditingController();
 
-String tarihGun = DateFormat("yyyy-MM-dd").format(DateTime.now()).toString();
-String gunVeSaat =
-    "${DateFormat("yyyy-MM-dd").format(DateTime.now())}  ${DateFormat("HH:mm").format(DateTime.now())}";
+String tarihGun = DateFormat("dd-MM-yyyy").format(DateTime.now()).toString();
+
+String saatBilgisi = DateFormat("HH:mm").format(DateTime.now());
+String gunBilgisi = DateFormat("dd-MM-yyyy").format(DateTime.now()).toString();
+/* "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}"; */
 
 Future<void> yeIcVeriEkle() async {
   hastaVeriEkle().then((value) => {yemekler.clear(), icecekler.clear()});
 }
-
-/* Future<void> gorevYaz() async {
-  doktorGorevVer().then((value) => {gorevler.clear()});
-} */
 
 Future<void> hastaVeriEkle() async {
   if (yemekler.text != "") {
@@ -31,9 +29,10 @@ Future<void> hastaVeriEkle() async {
         .set({
       "KullaniciUID": auth.currentUser!.uid,
       "Yemek": yemekler.text.toUpperCase(),
-      "Saat": gunVeSaat
+      "Gün": gunBilgisi,
+      "Saat": saatBilgisi
     }).whenComplete(() => print(
-            "${auth.currentUser!.email} kullanıcısı yiyecek verisi ekledi."));
+            "${auth.currentUser!.email} kullanıcısı $gunBilgisi tarihinde yiyecek verisi ekledi."));
   }
 
   if (icecekler.text != "") {
@@ -45,19 +44,9 @@ Future<void> hastaVeriEkle() async {
         .set({
       "KullaniciUID": auth.currentUser!.uid,
       "İçecek": icecekler.text.toUpperCase(),
-      "Saat": gunVeSaat
+      "Gün": gunBilgisi,
+      "Saat": saatBilgisi
     }).whenComplete(() => print(
-            "${auth.currentUser!.email} kullanıcısı içecek verisi ekledi."));
+            "${auth.currentUser!.email} kullanıcısı $gunBilgisi tarihinde içecek verisi ekledi."));
   }
 }
-/* Future<void> doktorGorevVer() async {
-  if (gorevler.text != "") {
-    FirebaseFirestore.instance
-        .collection("Hastalar")
-        .doc(tiklanilanHasta)
-        .collection("Gorevler")
-        .doc()
-        .set({"gorev": gorevler.text, "Saat": tarihGun}).whenComplete(
-            () => print("$tiklanilanHasta kullanıcısına görev verisi ekledi."));
-  }
-} */

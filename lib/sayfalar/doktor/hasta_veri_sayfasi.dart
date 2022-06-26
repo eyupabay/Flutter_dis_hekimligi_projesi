@@ -17,9 +17,7 @@ class HastaVeriSayfasi extends StatefulWidget {
 class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
   DateTime? _chosenDateTime;
 
-  // Show the modal that contains the CupertinoDatePicker
   void _showDatePicker(context) {
-    // showCupertinoModalPopup is a built-in function of the cupertino library
     showCupertinoModalPopup(
         context: context,
         builder: (_) => Container(
@@ -31,7 +29,6 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
                     height: 400,
                     child: CupertinoDatePicker(
                         dateOrder: DatePickerDateOrder.dmy,
-                        use24hFormat: true,
                         mode: CupertinoDatePickerMode.date,
                         initialDateTime: DateTime.now(),
                         maximumYear: DateTime.now().year,
@@ -54,6 +51,8 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
 
   @override
   Widget build(BuildContext context) {
+    String secilenTarih =
+        "${_chosenDateTime?.day}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}";
     return Scaffold(
       appBar: ustBar(
         context: context,
@@ -78,24 +77,38 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
               ? "${_chosenDateTime?.day}-${_chosenDateTime?.month}-${_chosenDateTime?.year}"
               : 'Herhangi bir tarih seçilmedi.'),
           DoktordanHastaBilgileriOkuma(
+              okunacakBilgi: FirebaseFirestore.instance
+                  .collection("Hastalar")
+                  .doc(widget.tiklanilanHasta)
+                  .collection("Yiyecekler")
+                  .where("Gün", isEqualTo: secilenTarih),
+              okunacakBilgiKlasoru: "Yemek"),
+          /* DoktordanHastaBilgileriOkuma(
             okunacakBilgi: FirebaseFirestore.instance
                 .collection("Hastalar")
                 .doc(widget.tiklanilanHasta)
                 .collection("Yiyecekler")
                 .orderBy("Saat", descending: true),
             okunacakBilgiKlasoru: "Yemek",
-          ),
+          ), */
           const Divider(
             height: 20,
           ),
           DoktordanHastaBilgileriOkuma(
+              okunacakBilgi: FirebaseFirestore.instance
+                  .collection("Hastalar")
+                  .doc(widget.tiklanilanHasta)
+                  .collection("İçecekler")
+                  .where("Gün", isEqualTo: secilenTarih),
+              okunacakBilgiKlasoru: "İçecek"),
+          /* DoktordanHastaBilgileriOkuma(
             okunacakBilgi: FirebaseFirestore.instance
                 .collection("Hastalar")
                 .doc(widget.tiklanilanHasta)
                 .collection("İçecekler")
                 .orderBy("Saat", descending: true),
             okunacakBilgiKlasoru: "İçecek",
-          ),
+          ), */
           CupertinoButton.filled(
               /* 
               style: ElevatedButton.styleFrom(

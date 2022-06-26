@@ -37,7 +37,7 @@ class LoginPageState extends State<LoginPageDoktor> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future getDataDoktor() async {
+  Future getDataDoktor2() async {
     var querySnapshot =
         await FirebaseFirestore.instance.collection('Doktorlar').get();
     for (int i = 0; i < querySnapshot.docs.length; i++) {
@@ -72,6 +72,61 @@ class LoginPageState extends State<LoginPageDoktor> {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => NavigationBarDoktor()));
         print("Doktor bulundu");
+        break;
+      }
+    }
+  }
+
+  Future getDataDoktor() async {
+    var querySnapshot =
+        await FirebaseFirestore.instance.collection('Doktorlar').get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      if (emailController.text.toString().toLowerCase() !=
+          querySnapshot.docs[i]["Email"]) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => NavigationBarDoktor()));
+        print("Doktor bulundu");
+        break;
+      } else {
+        print("Doktor bulunamadı, diğer fonksiyona geçiliyor..");
+
+        var querySnapshot =
+            await FirebaseFirestore.instance.collection('Doktorlar').get();
+        for (int i = 0; i < querySnapshot.docs.length; i++) {
+          if (emailController.text.toString().toLowerCase() !=
+              querySnapshot.docs[i]["Email"]) {
+            return showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                print("Doktor bulunamadı.");
+                return AlertDialog(
+                  title: const Text('Hata'),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: const <Widget>[
+                        Text('Bir hata ile karşılaştınız'),
+                      ],
+                    ),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Tamam'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => NavigationBarDoktor()));
+            print("Doktor bulundu");
+            break;
+          }
+        }
       }
     }
   }
@@ -131,6 +186,7 @@ class LoginPageState extends State<LoginPageDoktor> {
                     print(user);
                     if (user != null) {
                       return getDataDoktor();
+
                       /* Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => const EnAltBarDoktor())); */
                     }
