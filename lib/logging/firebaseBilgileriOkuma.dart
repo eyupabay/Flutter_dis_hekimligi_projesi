@@ -34,6 +34,11 @@ Query yiyeceklerRef = FirebaseFirestore.instance
     .collection("Yiyecekler")
     .orderBy("Saat", descending: true);
 
+Query profilRef = FirebaseFirestore.instance
+    .collection("Hastalar")
+    .doc(FirebaseAuth.instance.currentUser!.email)
+    .collection("Bilgiler");
+
 Query iceceklerRef = FirebaseFirestore.instance
     .collection("Hastalar")
     .doc(FirebaseAuth.instance.currentUser!.email)

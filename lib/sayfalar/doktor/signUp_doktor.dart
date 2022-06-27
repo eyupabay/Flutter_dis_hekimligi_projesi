@@ -25,7 +25,7 @@ class _SignUpDoktorState extends State<SignUpDoktor> {
           .createUserWithEmailAndPassword(
               email: emailControllerDoktor.text,
               password: passwordControllerDoktor.text)
-          .then((kullanici) {
+          .then((kullaniciDoktor) {
         FirebaseFirestore.instance
             .collection("Doktorlar")
             .doc(emailControllerDoktor.text)

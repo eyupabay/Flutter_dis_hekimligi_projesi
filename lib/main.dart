@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          listTileTheme: const ListTileThemeData(
+            visualDensity: VisualDensity.comfortable,
+          ),
           cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
             primaryColor: Colors.teal[300],
           ),
@@ -59,8 +62,10 @@ class MyApp extends StatelessWidget {
                   fontSize: 14.0, fontWeight: FontWeight.w600)),
           scaffoldBackgroundColor: Colors.white,
           primarySwatch: Colors.teal,
-          cardColor: Color(0xff53b2d4),
           cardTheme: CardTheme(
+              shadowColor: Colors.blueGrey[300],
+              margin: const EdgeInsets.all(6.0),
+              color: const Color.fromARGB(255, 102, 182, 211),
               elevation: 2.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14.0))),

@@ -85,7 +85,7 @@ class LoginPageState extends State<LoginPageDoktor> {
           querySnapshot.docs[i]["Email"]) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => NavigationBarDoktor()));
-        print("Doktor bulundu");
+        print("Doktor bulundu...");
         break;
       } else {
         print("Doktor bulunamadı, diğer fonksiyona geçiliyor..");

@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hastaProfil.dart';
+
+import 'package:intl/intl.dart';
 import 'package:flutter_uygulama_deniyorum/models/altNavigationDoktor.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/gorev_ver.dart';
 import '../../logging/firebaseBilgileriOkuma.dart';
@@ -63,18 +67,28 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
                   builder: (context) => NavigationBarDoktor()));
             },
             icon: const Icon(CupertinoIcons.left_chevron)),
+        aksiyon: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HastaninProfilDetaylari(
+                        tiklanilanHasta: widget.tiklanilanHasta,
+                      )));
+            },
+            icon: const Icon(CupertinoIcons.gear),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
-          Text(widget.tiklanilanHasta),
           CupertinoButton(
             padding: EdgeInsetsDirectional.zero,
             child: const Text('Tarihlere filtrele'),
             onPressed: () => _showDatePicker(context),
           ),
           Text(_chosenDateTime != null
-              ? "${_chosenDateTime?.day}-${_chosenDateTime?.month}-${_chosenDateTime?.year}"
+              ? "${_chosenDateTime?.day}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}"
               : 'Herhangi bir tarih seçilmedi.'),
           DoktordanHastaBilgileriOkuma(
               okunacakBilgi: FirebaseFirestore.instance
@@ -83,14 +97,6 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
                   .collection("Yiyecekler")
                   .where("Gün", isEqualTo: secilenTarih),
               okunacakBilgiKlasoru: "Yemek"),
-          /* DoktordanHastaBilgileriOkuma(
-            okunacakBilgi: FirebaseFirestore.instance
-                .collection("Hastalar")
-                .doc(widget.tiklanilanHasta)
-                .collection("Yiyecekler")
-                .orderBy("Saat", descending: true),
-            okunacakBilgiKlasoru: "Yemek",
-          ), */
           const Divider(
             height: 20,
           ),
@@ -101,20 +107,7 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
                   .collection("İçecekler")
                   .where("Gün", isEqualTo: secilenTarih),
               okunacakBilgiKlasoru: "İçecek"),
-          /* DoktordanHastaBilgileriOkuma(
-            okunacakBilgi: FirebaseFirestore.instance
-                .collection("Hastalar")
-                .doc(widget.tiklanilanHasta)
-                .collection("İçecekler")
-                .orderBy("Saat", descending: true),
-            okunacakBilgiKlasoru: "İçecek",
-          ), */
           CupertinoButton.filled(
-              /* 
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)) */
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(

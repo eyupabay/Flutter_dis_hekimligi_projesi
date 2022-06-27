@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hastaKaydet.dart';
 import 'package:flutter_uygulama_deniyorum/main.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hastaProfil.dart';
 
 TextField textGirdileri(
     {required TextEditingController alinacakBilgi,
@@ -71,6 +72,23 @@ class HastaEklemeButonu extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const KayitEtHasta()));
       },
       icon: const Icon(CupertinoIcons.person_add),
+    );
+  }
+}
+
+class HastaProfilDetaylari extends StatelessWidget {
+  const HastaProfilDetaylari({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HastaninProfilDetaylari()));
+      },
+      icon: const Icon(CupertinoIcons.gear),
     );
   }
 }

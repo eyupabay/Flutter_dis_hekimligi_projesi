@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/profil_bilgileri.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/ana_menu(hasta).dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/gorevler.dart';
 import 'package:flutter_uygulama_deniyorum/sayfalar/profil_sayfasi.dart';
@@ -10,11 +11,16 @@ class NavigationBarHasta extends StatefulWidget {
 }
 
 class _NavigationBarHastaState extends State<NavigationBarHasta> {
-  final List<Widget> _tabs = const [HastaPaneli(), Gorevler(), ProfilPage()];
+  final List<Widget> _tabs = const [
+    HastaPaneli(),
+    Gorevler(),
+    ProfilSayfasiHasta()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false,
       child: CupertinoTabScaffold(
           tabBar: CupertinoTabBar(
             items: const [

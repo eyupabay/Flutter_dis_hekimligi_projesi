@@ -9,6 +9,12 @@ final yemekler = TextEditingController();
 final icecekler = TextEditingController();
 final gorevler = TextEditingController();
 
+final isim = TextEditingController();
+final soyisim = TextEditingController();
+final yas = TextEditingController();
+final sikayet = TextEditingController();
+final telefon = TextEditingController();
+
 String tarihGun = DateFormat("dd-MM-yyyy").format(DateTime.now()).toString();
 
 String saatBilgisi = DateFormat("HH:mm").format(DateTime.now());
@@ -17,6 +23,16 @@ String gunBilgisi = DateFormat("dd-MM-yyyy").format(DateTime.now()).toString();
 
 Future<void> yeIcVeriEkle() async {
   hastaVeriEkle().then((value) => {yemekler.clear(), icecekler.clear()});
+}
+
+Future<void> profilSet() async {
+  profilBilgileriSet().then((value) => {
+        isim.clear(),
+        soyisim.clear(),
+        yas.clear(),
+        sikayet.clear(),
+        telefon.clear()
+      });
 }
 
 Future<void> hastaVeriEkle() async {
@@ -48,5 +64,63 @@ Future<void> hastaVeriEkle() async {
       "Saat": saatBilgisi
     }).whenComplete(() => print(
             "${auth.currentUser!.email} kullanıcısı $gunBilgisi tarihinde içecek verisi ekledi."));
+  }
+}
+
+Future<void> profilBilgileriSet() async {
+  if (isim.text != "") {
+    FirebaseFirestore.instance
+        .collection("Hastalar")
+        .doc(auth.currentUser!.email)
+        .collection("Bilgiler")
+        .doc("Bilgilerim")
+        .update({"İsim": isim.text}).whenComplete(() => print(
+            "${auth.currentUser!.email} kullanıcısı tarihinde isim verisi ekledi."));
+  }
+
+  if (soyisim.text != "") {
+    FirebaseFirestore.instance
+        .collection("Hastalar")
+        .doc(auth.currentUser!.email)
+        .collection("Bilgiler")
+        .doc("Bilgilerim")
+        .update({
+      "Soyisim": soyisim,
+    }).whenComplete(() => print(
+            "${auth.currentUser!.email} kullanıcısı tarihinde soyisim verisi ekledi."));
+  }
+
+  if (yas.text != "") {
+    FirebaseFirestore.instance
+        .collection("Hastalar")
+        .doc(auth.currentUser!.email)
+        .collection("Bilgiler")
+        .doc("Bilgilerim")
+        .update({
+      "Yaş": yas,
+    }).whenComplete(() => print(
+            "${auth.currentUser!.email} kullanıcısı tarihinde yaş verisi ekledi."));
+  }
+  if (sikayet.text != "") {
+    FirebaseFirestore.instance
+        .collection("Hastalar")
+        .doc(auth.currentUser!.email)
+        .collection("Bilgiler")
+        .doc("Bilgilerim")
+        .update({
+      "Şikayet": sikayet,
+    }).whenComplete(() => print(
+            "${auth.currentUser!.email} kullanıcısı tarihinde şikayet verisi ekledi."));
+  }
+  if (telefon.text != "") {
+    FirebaseFirestore.instance
+        .collection("Hastalar")
+        .doc(auth.currentUser!.email)
+        .collection("Bilgiler")
+        .doc("Bilgilerim")
+        .update({
+      "Telefon": telefon,
+    }).whenComplete(() => print(
+            "${auth.currentUser!.email} kullanıcısı tarihinde telefon verisi ekledi."));
   }
 }

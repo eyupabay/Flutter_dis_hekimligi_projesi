@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,11 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
+    TextEditingController isim = TextEditingController();
+    TextEditingController soyisim = TextEditingController();
+    TextEditingController yas = TextEditingController();
+    TextEditingController sikayet = TextEditingController();
+    TextEditingController telefon = TextEditingController();
 
     Future<void> hastaEntegreEt() async {
       FirebaseFirestore.instance
@@ -27,19 +34,42 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
           .doc(girisYapanKullaniciMaili)
           .collection("Hastalarim")
           .doc(emailController.text)
+          .collection("Bilgiler")
+          .doc("Özellikler")
           .set({
             "Email": emailController.text,
-            "role": "hasta",
+            "İsim": isim.text.toUpperCase(),
+            "Soyisim": soyisim.text.toUpperCase(),
+            "Yaş": yas.text,
+            "Şikayet": sikayet.text.toUpperCase(),
+            "Telefon": telefon.text,
             "doktorMaili": girisYapanKullaniciMaili
           })
           .whenComplete(() => print(
               "${emailController.text} kullanıcısı doktorun koleksiyonuna eklendi."))
           .whenComplete(() => FirebaseFirestore.instance
-                  .collection("Hastalar")
+                  .collection("Doktorlar")
+                  .doc(girisYapanKullaniciMaili)
+                  .collection("Hastalarim")
                   .doc(emailController.text)
                   .set({
                 "Email": emailController.text,
-                "role": "hasta",
+                "İsim": isim.text.toUpperCase(),
+                "Soyisim": soyisim.text.toUpperCase(),
+                "doktorMaili": girisYapanKullaniciMaili
+              }))
+          .whenComplete(() => FirebaseFirestore.instance
+                  .collection("Hastalar")
+                  .doc(emailController.text)
+                  .collection("Bilgiler")
+                  .doc("Bilgilerim")
+                  .set({
+                "Email": emailController.text,
+                "İsim": isim.text.toUpperCase(),
+                "Soyisim": soyisim.text.toUpperCase(),
+                "Yaş": yas.text,
+                "Şikayet": sikayet.text.toUpperCase(),
+                "Telefon": telefon.text,
                 "doktorMaili": girisYapanKullaniciMaili
               }))
           .whenComplete(() => print(
@@ -62,9 +92,8 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
       body: Padding(
         padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const AnaEkrangif(),
+            /* const AnaEkrangif(), */
             Text(
               "Hasta kayıt et",
               textAlign: TextAlign.center,
@@ -74,6 +103,36 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
                 alinacakBilgi: emailController,
                 dekorasyon: girisMailDekorasyonu(),
                 ilerleme: TextInputAction.next,
+                isAutofocus: true,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: isim,
+                dekorasyon: InputDecoration(hintText: "İsim"),
+                ilerleme: TextInputAction.next,
+                isAutofocus: false,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: soyisim,
+                dekorasyon: InputDecoration(hintText: "Soyisim"),
+                ilerleme: TextInputAction.next,
+                isAutofocus: false,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: yas,
+                dekorasyon: InputDecoration(hintText: "Yaş"),
+                ilerleme: TextInputAction.next,
+                isAutofocus: false,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: telefon,
+                dekorasyon: InputDecoration(hintText: "Telefon No"),
+                ilerleme: TextInputAction.next,
+                isAutofocus: false,
+                isObscureText: false),
+            textGirdileri(
+                alinacakBilgi: sikayet,
+                dekorasyon: InputDecoration(hintText: "Şikayet"),
+                ilerleme: TextInputAction.done,
                 isAutofocus: true,
                 isObscureText: false),
             CupertinoButton.filled(

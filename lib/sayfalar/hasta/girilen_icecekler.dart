@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/models/AltNavigationHasta.dart';
@@ -12,8 +13,44 @@ class GirilenIcecekSayfasi extends StatefulWidget {
 }
 
 class _GirilenIcecekSayfasiState extends State<GirilenIcecekSayfasi> {
+  DateTime? _chosenDateTime;
+
+  void _showDatePicker(context) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (_) => Container(
+              height: 500,
+              color: const Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                        dateOrder: DatePickerDateOrder.dmy,
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: DateTime.now(),
+                        maximumYear: DateTime.now().year,
+                        minimumYear: DateTime.now().year - 1,
+                        maximumDate: DateTime.now(),
+                        onDateTimeChanged: (val) {
+                          setState(() {
+                            _chosenDateTime = val;
+                          });
+                        }),
+                  ),
+                  CupertinoButton(
+                    child: const Text('SEÇ'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              ),
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    String secilenTarih =
+        "${_chosenDateTime?.day}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}";
     return Scaffold(
       appBar: ustBar(
         context: context,
@@ -28,8 +65,21 @@ class _GirilenIcecekSayfasiState extends State<GirilenIcecekSayfasi> {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(children: [
+          CupertinoButton(
+            padding: EdgeInsetsDirectional.zero,
+            child: const Text('Tarihlere filtrele'),
+            onPressed: () => _showDatePicker(context),
+          ),
+          Text(_chosenDateTime != null
+              ? "${_chosenDateTime?.day}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}"
+              : 'Herhangi bir tarih seçilmedi.'),
           HastaBilgileriOkuma(
-              okunacakBilgi: iceceklerRef, okunacakBilgiKlasoru: "İçecek"),
+              okunacakBilgi: FirebaseFirestore.instance
+                  .collection("Hastalar")
+                  .doc(auth.currentUser?.email)
+                  .collection("İçecekler")
+                  .where("Gün", isEqualTo: secilenTarih),
+              okunacakBilgiKlasoru: "İçecek"),
         ]),
       ),
     );

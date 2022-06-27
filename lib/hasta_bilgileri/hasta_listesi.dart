@@ -11,6 +11,7 @@ class HastaListesi extends StatefulWidget {
 
 class _HastaListesiState extends State<HastaListesi> {
   late String tiklanilanHasta;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -27,8 +28,12 @@ class _HastaListesiState extends State<HastaListesi> {
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.grey[300],
+                      ),
+                      minVerticalPadding: 20.0,
                       title: Text(
-                          (listofDocsSnap[index].data() as Map)["Email"],
+                          "${(listofDocsSnap[index].data() as Map)["İsim"]} ${(listofDocsSnap[index].data() as Map)["Soyisim"]}",
                           style: Theme.of(context).textTheme.bodyText1),
                       trailing: IconButton(
                           onPressed: () async {

@@ -25,7 +25,7 @@ class _SignUpHastaState extends State<SignUpHasta> {
           .createUserWithEmailAndPassword(
               email: emailControllerHasta.text,
               password: passwordControllerHasta.text)
-          .then((kullanici) {
+          .then((kullaniciHasta) {
         FirebaseFirestore.instance
             .collection("Hastalar")
             .doc(emailControllerHasta.text)
@@ -34,9 +34,6 @@ class _SignUpHastaState extends State<SignUpHasta> {
       }).whenComplete(() => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const LoginTabBar())));
     }
-
-    TextEditingController emailControllerDoktor = TextEditingController();
-    TextEditingController passwordControllerDoktor = TextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -49,13 +46,13 @@ class _SignUpHastaState extends State<SignUpHasta> {
               style: Theme.of(context).textTheme.headline4,
             ),
             textGirdileri(
-                alinacakBilgi: emailControllerDoktor,
+                alinacakBilgi: emailControllerHasta,
                 dekorasyon: girisMailDekorasyonu(),
                 ilerleme: TextInputAction.next,
                 isAutofocus: true,
                 isObscureText: false),
             textGirdileri(
-                alinacakBilgi: passwordControllerDoktor,
+                alinacakBilgi: passwordControllerHasta,
                 dekorasyon: girisSifreDekorasyonu(),
                 ilerleme: TextInputAction.none,
                 isAutofocus: false,

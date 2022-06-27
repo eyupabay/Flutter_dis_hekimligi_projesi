@@ -49,6 +49,7 @@ class _HastaPaneliState extends State<HastaPaneli> {
               IconButton(
                 iconSize: 60.0,
                 icon: const Icon(Icons.food_bank),
+                tooltip: "Yiyecekler",
                 onPressed: () async {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const GirilenYemekSayfasi()));
@@ -57,6 +58,7 @@ class _HastaPaneliState extends State<HastaPaneli> {
               IconButton(
                 iconSize: 60.0,
                 icon: const Icon(Icons.local_drink),
+                tooltip: "İçecekler",
                 onPressed: () async {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const GirilenIcecekSayfasi()));

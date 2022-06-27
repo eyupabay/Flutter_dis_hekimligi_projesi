@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/hasta/profil_bilgileri.dart';
 import 'package:flutter_uygulama_deniyorum/models/AltNavigationHasta.dart';
 import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
 import 'package:flutter_uygulama_deniyorum/models/log_islemleri.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustPanel_signUp.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/profil_sayfasi.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 
 class LoginPageHasta extends StatefulWidget {
@@ -49,34 +51,43 @@ class LoginPageState extends State<LoginPageHasta> {
       if (emailController.text.toString().toLowerCase() !=
           querySnapshot.docs[i]["Email"]) {
         print("Hasta bulunamadı.");
-        return showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Hata'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: const <Widget>[
-                    Text('Bir hata ile karşılaştınız'),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('TAMAM'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
       } else {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => NavigationBarHasta()));
-        print("Hasta bulundu.");
+        print("Hasta bulunamadı, diğer fonksiyona geçiliyor...");
+        var querySnapshot =
+            await FirebaseFirestore.instance.collection('Hastalar').get();
+        for (int i = 0; i < querySnapshot.docs.length; i++) {
+          if (emailController.text.toString().toLowerCase() !=
+              querySnapshot.docs[i]["Email"]) {
+            return showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Hata'),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: const <Widget>[
+                        Text('Bir hata ile karşılaştınız'),
+                      ],
+                    ),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Tamam'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => NavigationBarHasta()));
+            print("Hasta bulundu.");
+          }
+        }
       }
     }
   }
@@ -135,7 +146,9 @@ class LoginPageState extends State<LoginPageHasta> {
                         context: context);
                     print(user);
                     if (user != null) {
-                      return getDataHasta();
+                      /* return getDataHasta(); */
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => NavigationBarHasta()));
                     }
                   },
                   child: Text(
