@@ -255,6 +255,11 @@ class _DoktordanGorevleriOkumaState extends State<DoktordanGorevleriOkuma> {
                             await listofDocsSnap[index].reference.delete();
                           },
                           icon: const Icon(CupertinoIcons.trash)),
+                      leading: Icon(
+                          (listofDocsSnap[index].get("yapildi") as bool ==
+                                  false)
+                              ? CupertinoIcons.app
+                              : CupertinoIcons.checkmark_square),
                     ),
                   );
                 }),
