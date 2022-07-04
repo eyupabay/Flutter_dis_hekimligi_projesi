@@ -58,30 +58,87 @@ class ProfilSayfasiHastaState extends State<HastaninProfilDetaylari> {
                       itemCount: listofDocsSnap.length,
                       itemBuilder: (context, index) {
                         return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              "İsim : ${listofDocsSnap[index].get("İsim")}",
-                              style: Theme.of(context).textTheme.headline2,
+                              "${listofDocsSnap[index].get("İsim")} ${listofDocsSnap[index].get("Soyisim")}",
+                              style: Theme.of(context).textTheme.headline4,
                             ),
-                            Text(
-                              "Soyisim : ${listofDocsSnap[index].get("Soyisim")}",
-                              style: Theme.of(context).textTheme.headline2,
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              color: Colors.grey[100],
+                              child: Text(
+                                "YAŞ : ${listofDocsSnap[index].get("Yaş").toString()}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
                             ),
-                            Text(
-                              "YAŞ : ${listofDocsSnap[index].get("Yaş").toString()}",
-                              style: Theme.of(context).textTheme.headline2,
+                            Card(
+                              color: Colors.grey[100],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              child: Text(
+                                "Email : ${listofDocsSnap[index].get("Email")}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
                             ),
-                            Text(
-                              "Email : ${listofDocsSnap[index].get("Email")}",
-                              style: Theme.of(context).textTheme.headline2,
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              color: Colors.grey[100],
+                              child: Text(
+                                "Telefon : ${listofDocsSnap[index].get("Telefon").toString()}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
                             ),
-                            Text(
-                              "Telefon : ${listofDocsSnap[index].get("Telefon").toString()}",
-                              style: Theme.of(context).textTheme.headline2,
+                            Card(
+                              color: Colors.grey[100],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              child: Text(
+                                "Şikayet : ${listofDocsSnap[index].get("Şikayet")}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
                             ),
-                            Text(
-                              "Şikayet : ${listofDocsSnap[index].get("Şikayet")}",
-                              style: Theme.of(context).textTheme.headline2,
+                            const Divider(
+                              height: 20,
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Sigara kullanıyor mu?",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                              leading: Icon((listofDocsSnap[index].get("Sigara")
+                                          as bool ==
+                                      false)
+                                  ? CupertinoIcons.app
+                                  : CupertinoIcons.checkmark_square),
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Ağız çalkalama suyu kullanıyor mu?",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                              leading: Icon((listofDocsSnap[index]
+                                          .get("AgizCalkalama") as bool ==
+                                      false)
+                                  ? CupertinoIcons.app
+                                  : CupertinoIcons.checkmark_square),
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Diş ipi kullanıyor mu?",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                              leading: Icon((listofDocsSnap[index].get("Disipi")
+                                          as bool ==
+                                      false)
+                                  ? CupertinoIcons.app
+                                  : CupertinoIcons.checkmark_square),
                             ),
                           ],
                         );

@@ -126,29 +126,57 @@ class ProfilSayfasiHastaState extends State<ProfilSayfasiHasta> {
                       itemCount: listofDocsSnap.length,
                       itemBuilder: (context, index) {
                         return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              "İsim : ${listofDocsSnap[index].get("İsim")}",
-                              style: Theme.of(context).textTheme.headline2,
+                              "${listofDocsSnap[index].get("İsim")} ${listofDocsSnap[index].get("Soyisim")}",
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            Card(
+                              color: Colors.grey[100],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              child: Text(
+                                "YAŞ : ${listofDocsSnap[index].get("Yaş").toString()}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            ),
+                            Card(
+                              color: Colors.grey[100],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              child: Text(
+                                "Email : ${listofDocsSnap[index].get("Email")}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            ),
+                            Card(
+                              color: Colors.grey[100],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              child: Text(
+                                "Telefon : ${listofDocsSnap[index].get("Telefon").toString()}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            ),
+                            Card(
+                              color: Colors.grey[100],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(8)),
+                              child: Text(
+                                "Şikayet : ${listofDocsSnap[index].get("Şikayet")}",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            ),
+                            const Divider(
+                              height: 20,
                             ),
                             Text(
-                              "Soyisim : ${listofDocsSnap[index].get("Soyisim")}",
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
-                            Text(
-                              "YAŞ : ${listofDocsSnap[index].get("Yaş").toString()}",
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
-                            Text(
-                              "Email : ${listofDocsSnap[index].get("Email")}",
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
-                            Text(
-                              "Telefon : ${listofDocsSnap[index].get("Telefon").toString()}",
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
-                            Text(
-                              "Şikayet : ${listofDocsSnap[index].get("Şikayet")}",
+                              "Doktorunuzun E-Postası : ${listofDocsSnap[index].get("doktorMaili")}",
                               style: Theme.of(context).textTheme.headline2,
                             ),
                           ],

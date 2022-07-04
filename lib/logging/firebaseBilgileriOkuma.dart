@@ -125,7 +125,6 @@ class _HastaGorevleriOkumaState extends State<HastaGorevleriOkuma> {
                 itemCount: listofDocsSnap.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Theme.of(context).cardColor,
                     child: ListTile(
                       title: Text(
                           listofDocsSnap[index]

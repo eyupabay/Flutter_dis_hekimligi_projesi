@@ -56,7 +56,7 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
   @override
   Widget build(BuildContext context) {
     String secilenTarih =
-        "${_chosenDateTime?.day}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}";
+        "${_chosenDateTime?.day.toString().padLeft(2, "0")}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}";
     return Scaffold(
       appBar: ustBar(
         context: context,
@@ -88,7 +88,7 @@ class _HastaVeriSayfasiState extends State<HastaVeriSayfasi> {
             onPressed: () => _showDatePicker(context),
           ),
           Text(_chosenDateTime != null
-              ? "${_chosenDateTime?.day}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}"
+              ? "${_chosenDateTime?.day.toString().padLeft(2, "0")}-${_chosenDateTime?.month.toString().padLeft(2, "0")}-${_chosenDateTime?.year}"
               : 'Herhangi bir tarih seçilmedi.'),
           DoktordanHastaBilgileriOkuma(
               okunacakBilgi: FirebaseFirestore.instance

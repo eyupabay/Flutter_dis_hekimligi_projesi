@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uygulama_deniyorum/logging/firebaseBilgileriOkuma.dart';
 import 'package:flutter_uygulama_deniyorum/models/altNavigationDoktor.dart';
 import 'package:flutter_uygulama_deniyorum/models/dekorasyonlar.dart';
+import 'package:flutter_uygulama_deniyorum/sayfalar/doktor/hastaKaydet_2.dart';
 import 'package:flutter_uygulama_deniyorum/stringler.dart';
 import 'package:flutter_uygulama_deniyorum/models/ustAppBar.dart';
 import '../../models/log_islemleri.dart';
 
 class KayitEtHasta extends StatefulWidget {
-  const KayitEtHasta({Key? key}) : super(key: key);
+  const KayitEtHasta({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<KayitEtHasta> createState() => _KayitEtHastaState();
@@ -75,7 +78,9 @@ class _KayitEtHastaState extends State<KayitEtHasta> {
           .whenComplete(() => print(
               "${emailController.text} kullanıcısı Hastalar koleksiyonuna eklendi."))
           .whenComplete(() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => NavigationBarDoktor())));
+              MaterialPageRoute(
+                  builder: (context) =>
+                      KayitEtHasta_2(hastaMaili: emailController.text))));
     }
 
     return Scaffold(
